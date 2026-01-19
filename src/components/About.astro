@@ -1,0 +1,49 @@
+---
+import TerminalComponent from "./TerminalComponent";
+import SkillCarousel from "./SkillCarousel";
+const logos = [
+  { src: "fab fa-react", alt: "React" },
+  {
+    src: "https://upload.wikimedia.org/wikipedia/commons/9/9a/Laravel.svg",
+    alt: "Laravel",
+  },
+  { src: "https://nodejs.org/static/logos/jsIconGreen.svg", alt: "Node.js" },
+  { src: "fab fa-php", alt: "PHP" },
+  { src: "fab fa-golang", alt: "Golang" },
+];
+---
+
+<section
+  id="about"
+  class="min-h-screen bg-bg bg-linear-to-b from-black to-bgSecondary py-20"
+>
+  <h1 class="text-heading text-4xl text-center font-extrabold py-10">
+    About Me
+  </h1>
+  <div class="container mx-auto px-4">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
+      <div class="order-last md:order-first">
+        <p class="text-text text-lg">
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam nec
+          metus nec ante vestibulum finibus. Nullam nec metus nec ante
+          vestibulum finibus. Nullam nec metus nec ante vestibulum finibus.
+        </p>
+
+        <div class="mt-7">
+          <a href="" class="font-bold button text-heading p-3 rounded"
+            >Download CV</a
+          >
+        </div>
+      </div>
+      <div class="order-first md:order-last hidden md:block">
+        <TerminalComponent client:only="react" />
+      </div>
+    </div>
+    <div class="mt-10">
+      <h3 class="text-heading text-xl text-center py-10">
+        I'm also able to perform the skills below
+      </h3>
+      <SkillCarousel client:load logos={logos} />
+    </div>
+  </div>
+</section>

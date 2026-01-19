@@ -1,0 +1,45 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root{
+    font-family: 'Poppins', sans-serif;
+}
+
+@theme {
+    --color-bg: #16161a;
+    --color-bgSecondary: #242629;
+    --color-primary: #7f5af0;
+    --color-secondary: #72757e;
+    --color-tertiary: #2cb67d;
+    --color-heading: #fffffe;
+    --color-text: #94a1b2;
+}
+
+.light {
+    --color-bg: #16161a;
+    --color-bgSecondary: #242629;
+    --color-primary: #7f5af0;
+    --color-secondary: #72757e;
+    --color-tertiary: #2cb67d;
+    --color-heading: #fffffe;
+    --color-text: #94a1b2;
+}
+
+body {
+    color: var(--color-text);
+    background-color: var(--color-bg);
+}
+
+.button {
+    background-color: var(--color-primary);
+}
+
+.button:hover {
+    background-color: var(--color-tertiary);
+}
