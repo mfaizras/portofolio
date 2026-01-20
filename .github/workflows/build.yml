@@ -21,17 +21,26 @@ jobs:
       - run: npm ci
       - run: npm run build
 
-      - name: Publish dist to build branch
+      - name: Publish ONLY dist contents to build branch
+        shell: bash
         run: |
-          git config user.name "github-actions"
-          git config user.email "github-actions@github.com"
+          set -e
 
-          mkdir -p /tmp/dist
-          cp -r dist/* /tmp/dist/
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
 
-          git checkout --orphan build
-          git rm -rf .
-          cp -r /tmp/dist/* .
-          git add .
-          git commit -m "Build: $GITHUB_SHA"
+          # Pastikan dist ada
+          test -d dist
+
+          # Masuk ke dist, jadikan itu root repo baru untuk branch build
+          cd dist
+
+          # Commit hanya file hasil build
+          git init
+          git add -A
+          git commit -m "Build: ${GITHUB_SHA}"
+
+          # Force push ke branch build
+          git branch -M build
+          git remote add origin "https://x-access-token:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git"
           git push -f origin build
