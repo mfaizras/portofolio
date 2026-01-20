@@ -26,21 +26,20 @@ jobs:
         run: |
           set -e
 
-          git config user.name "github-actions[bot]"
-          git config user.email "github-actions[bot]@users.noreply.github.com"
-
           # Pastikan dist ada
           test -d dist
 
-          # Masuk ke dist, jadikan itu root repo baru untuk branch build
           cd dist
 
-          # Commit hanya file hasil build
           git init
+
+          # SET IDENTITY DI REPO BARU INI
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
           git add -A
           git commit -m "Build: ${GITHUB_SHA}"
 
-          # Force push ke branch build
           git branch -M build
           git remote add origin "https://x-access-token:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git"
           git push -f origin build
