@@ -12,28 +12,30 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          persist-credentials: false # penting: jangan pakai kredensial default checkout
 
       - uses: actions/setup-node@v4
         with:
           node-version: 20
-          cache: "npm"
+          cache: npm
 
       - run: npm ci
       - run: npm run build
 
       - name: Publish ONLY dist contents to build branch
         shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
         run: |
-          set -e
+          set -euo pipefail
 
-          # Pastikan dist ada
           test -d dist
-
           cd dist
 
           git init
-
-          # SET IDENTITY DI REPO BARU INI
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
 
@@ -41,5 +43,8 @@ jobs:
           git commit -m "Build: ${GITHUB_SHA}"
 
           git branch -M build
-          git remote add origin "https://x-access-token:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git"
+
+          # Remote pakai token (tanpa trailing slash)
+          git remote add origin "https://x-access-token:${GH_TOKEN}@github.com/${GH_REPO}.git"
+
           git push -f origin build
