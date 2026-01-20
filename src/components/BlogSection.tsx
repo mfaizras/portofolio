@@ -2,8 +2,7 @@ import { useRef } from 'react';
 import { motion } from 'motion/react';
 import { ArrowRight, Clock, Calendar, Tag } from 'lucide-react';
 import postsData from '../data/posts.json';
-import blogImage from '../assets/blog-placeholder.png'; // Import the image directly to use with Astro/Vite processing if needed, or mapping
-
+import blogImage from '../assets/blog-placeholder.png';
 export default function BlogSection() {
   return (
     <section id="blog" className="py-20 bg-bg relative overflow-hidden">
@@ -27,14 +26,16 @@ export default function BlogSection() {
               Thoughts on technology, coding patterns, and the ever-evolving landscape of software engineering.
             </p>
           </div>
-          
-          <a href="#blog" className="hidden md:flex items-center gap-2 text-primary font-medium hover:gap-3 transition-all">
-            View all posts <ArrowRight size={18} />
-          </a>
+          {postsData.length > 0 && (
+            <a href="#blog" className="hidden md:flex items-center gap-2 text-primary font-medium hover:gap-3 transition-all">
+              View all posts <ArrowRight size={18} />
+            </a>
+          )}
         </motion.div>
 
         {/* Grid */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {postsData.length > 0 ? (
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {postsData.map((post, index) => (
                 <motion.article
                     key={post.id}
@@ -88,15 +89,28 @@ export default function BlogSection() {
                     </div>
                 </motion.article>
             ))}
+            <div className="mt-12 text-center md:hidden">
+                <a href="#blog" className="inline-flex items-center gap-2 text-primary font-medium border border-primary/20 px-6 py-3 rounded-full hover:bg-primary/5 transition-all">
+                    View all posts <ArrowRight size={18} />
+                </a>
+            </div>
+    
+          </div>
+          ) : (
+            <motion.div
+           initial={{ opacity: 0, y: 20 }}
+           whileInView={{ opacity: 1, y: 0 }}
+           viewport={{ once: true }}
+           transition={{ duration: 0.6 }}
+           className=""
+        >
+            <div>
+              <p className='text-center mt-12 text-text'>There Is No Posts Yet.</p>
+            </div>
+            </motion.div>
+          )}
         </div>
         
-        <div className="mt-12 text-center md:hidden">
-            <a href="#blog" className="inline-flex items-center gap-2 text-primary font-medium border border-primary/20 px-6 py-3 rounded-full hover:bg-primary/5 transition-all">
-                View all posts <ArrowRight size={18} />
-            </a>
-        </div>
-
-      </div>
     </section>
   );
 }

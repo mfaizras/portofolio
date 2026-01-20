@@ -1,0 +1,56 @@
+[
+  {
+    "id": 1,
+    "title": "1st Place - National Hackathon",
+    "organization": "Tech Giants Association",
+    "date": "November 2024",
+    "description": "Led a team of 4 to build an AI-powered accessibility tool. Awarded 'Best Innovation' out of 500+ participants.",
+    "icon": "TrophyIcon",
+    "color": "text-yellow-400"
+  },
+  {
+    "id": 2,
+    "title": "AWS Certified Solutions Architect",
+    "organization": "Amazon Web Services",
+    "date": "August 2024",
+    "description": "Validated expertise in designing distributed systems on AWS. Achieved a score in the top 5% of test takers.",
+    "icon": "AwardIcon",
+    "color": "text-blue-400"
+  },
+  {
+    "id": 3,
+    "title": "Guest Speaker: Future of Web Dev",
+    "organization": "DevCon 2024",
+    "date": "June 2024",
+    "description": "Delivered a keynote on 'The State of Frontend Architecture' to an audience of 2,000+ developers.",
+    "icon": "MicIcon",
+    "color": "text-purple-400"
+  },
+  {
+    "id": 4,
+    "title": "Open Source Contributor of the Month",
+    "organization": "Astro Framework",
+    "date": "March 2024",
+    "description": "Recognized for significant contributions to the core routing engine and documentation improvements.",
+    "icon": "StarIcon",
+    "color": "text-green-400"
+  },
+  {
+    "id": 5,
+    "title": "Best UI/UX Design Award",
+    "organization": "Dribbble Annual Showcase",
+    "date": "January 2024",
+    "description": "Featured project 'Nexus Dashboard' won the community vote for best interface design in the Fintech category.",
+    "icon": "ZapIcon",
+    "color": "text-orange-400"
+  },
+  {
+    "id": 6,
+    "title": "Full Stack Certification",
+    "organization": "Meta",
+    "date": "December 2023",
+    "description": "Completed rigorous comprehensive training in React, Django, and Database management.",
+    "icon": "CodeIcon",
+    "color": "text-cyan-400"
+  }
+]

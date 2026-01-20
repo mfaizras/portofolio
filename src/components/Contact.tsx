@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { motion } from 'motion/react';
-import { Mail, MapPin, Send, Github, Linkedin, Twitter, ExternalLink } from 'lucide-react';
+import { Mail, MapPin, Send, Github, Linkedin, Twitter, Instagram,Facebook, ExternalLink } from 'lucide-react';
+import SocialData from '../data/socialMedia.json';
 
 export default function Contact() {
   const [formState, setFormState] = useState({
@@ -92,17 +93,13 @@ export default function Contact() {
                 <div className="pt-8 border-t border-white/5">
                     <h4 className="text-heading font-semibold mb-4">Connect with me</h4>
                     <div className="flex gap-4">
-                        {[
-                            { icon: Github, href: "#" },
-                            { icon: Linkedin, href: "#" },
-                            { icon: Twitter, href: "#" }
-                        ].map((Social, index) => (
+                        {SocialData.map((Social, index) => (
                             <a 
                                 key={index}
                                 href={Social.href}
                                 className="p-3 bg-bgSecondary border border-white/5 rounded-lg text-text hover:text-primary hover:border-primary/50 hover:-translate-y-1 transition-all duration-300"
                             >
-                                <Social.icon size={20} />
+                                <i className={Social.icon}></i>
                             </a>
                         ))}
                     </div>

@@ -1,32 +1,3 @@
 [
-  {
-    "id": 1,
-    "title": "The Future of Frontend Development",
-    "excerpt": "Exploring the shift towards server components, new build tools, and the evolution of the modern web stack in 2024.",
-    "date": "Oct 15, 2023",
-    "readTime": "5 min read",
-    "image": "/src/assets/blog-placeholder.png",
-    "slug": "future-frontend-2024",
-    "tags": ["Frontend", "React", "Web"]
-  },
-  {
-    "id": 2,
-    "title": "Mastering TypeScript Generics",
-    "excerpt": "A deep dive into advanced TypeScript patterns, helping you write more reusable and type-safe code for scalable applications.",
-    "date": "Nov 22, 2023",
-    "readTime": "8 min read",
-    "image": "/src/assets/blog-placeholder.png",
-    "slug": "mastering-ts-generics",
-    "tags": ["TypeScript", "Coding", "Guide"]
-  },
-  {
-    "id": 3,
-    "title": "Why I Switched to Astro",
-    "excerpt": "My personal journey of migrating from a heavy SPA framework to Astro, and how it improved my site's performance drastically.",
-    "date": "Dec 05, 2023",
-    "readTime": "4 min read",
-    "image": "/src/assets/blog-placeholder.png",
-    "slug": "why-astro",
-    "tags": ["Astro", "Performance", "SSG"]
-  }
+
 ]

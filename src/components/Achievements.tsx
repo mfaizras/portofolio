@@ -1,64 +1,36 @@
 import { useState, useEffect, useCallback } from 'react';
 import useEmblaCarousel from 'embla-carousel-react';
 import { motion } from 'motion/react';
-import { Trophy, Award, Mic, Star, ChevronLeft, ChevronRight, Zap, Code } from 'lucide-react';
+import { Trophy, Award, Mic, Star, ChevronLeft, ChevronRight, Zap, Code, Cloud, Users } from 'lucide-react';
+import achievements from '../data/achievments.json';
 
-const achievements = [
-  {
-    id: 1,
-    title: "1st Place - National Hackathon",
-    organization: "Tech Giants Association",
-    date: "November 2024",
-    description: "Led a team of 4 to build an AI-powered accessibility tool. Awarded 'Best Innovation' out of 500+ participants.",
-    icon: Trophy,
-    color: "text-yellow-400"
-  },
-  {
-    id: 2,
-    title: "AWS Certified Solutions Architect",
-    organization: "Amazon Web Services",
-    date: "August 2024",
-    description: "Validated expertise in designing distributed systems on AWS. Achieved a score in the top 5% of test takers.",
-    icon: Award,
-    color: "text-blue-400"
-  },
-  {
-    id: 3,
-    title: "Guest Speaker: Future of Web Dev",
-    organization: "DevCon 2024",
-    date: "June 2024",
-    description: "Delivered a keynote on 'The State of Frontend Architecture' to an audience of 2,000+ developers.",
-    icon: Mic,
-    color: "text-purple-400"
-  },
-  {
-    id: 4,
-    title: "Open Source Contributor of the Month",
-    organization: "Astro Framework",
-    date: "March 2024",
-    description: "Recognized for significant contributions to the core routing engine and documentation improvements.",
-    icon: Star,
-    color: "text-green-400"
-  },
-  {
-    id: 5,
-    title: "Best UI/UX Design Award",
-    organization: "Dribbble Annual Showcase",
-    date: "January 2024",
-    description: "Featured project 'Nexus Dashboard' won the community vote for best interface design in the Fintech category.",
-    icon: Zap,
-    color: "text-orange-400"
-  },
-  {
-    id: 6,
-    title: "Full Stack Certification",
-    organization: "Meta",
-    date: "December 2023",
-    description: "Completed rigorous comprehensive training in React, Django, and Database management.",
-    icon: Code,
-    color: "text-cyan-400"
+const iconMap: Record<string, React.FC<any>> = {
+  TrophyIcon: Trophy,
+  CloudIcon: Cloud,
+  StarIcon: Star,
+  MicIcon: Mic,
+  AwardIcon: Award,
+  UsersIcon: Users,
+};
+
+const getIcon = (iconName: string) => {
+  if (iconName.startsWith('http')) {
+      return (props: { size?: number | string, className?: string }) => (
+          <img 
+            src={iconName} 
+            alt="icon" 
+            className={props.className}
+            style={{ 
+                width: props.size || '1em', 
+                height: props.size || '1em',
+                objectFit: 'contain' 
+            }} 
+          />
+      );
   }
-];
+  const IconComponent = iconMap[iconName];
+  return IconComponent || Trophy;
+};
 
 // Helper to chunk the array into groups of 4
 const chunkArray = (arr: typeof achievements, size: number) => {
@@ -138,7 +110,10 @@ export default function Achievements() {
                   className="flex-[0_0_100%] min-w-0 pl-4" // One slide per view
                 >
                   <div className="grid md:grid-cols-2 gap-6 pb-2">
-                    {chunk.map((item) => (
+                    {chunk.map((item) => {
+                      const AchievementIcon = getIcon(item.icon);
+                      return(
+                      
                       <motion.div
                         key={item.id}
                         whileHover={{ y: -5 }}
@@ -148,7 +123,7 @@ export default function Achievements() {
 
                          <div className="relative z-10 flex items-start gap-4">
                             <div className={`p-3 rounded-lg bg-bg border border-white/5 shadow-inner shrink-0 ${item.color}`}>
-                              <item.icon size={24} />
+                              <AchievementIcon size={24} />
                             </div>
                             <div>
                                <h3 className="text-lg font-bold text-heading group-hover:text-primary transition-colors mb-1">
@@ -163,7 +138,7 @@ export default function Achievements() {
                             </div>
                          </div>
                       </motion.div>
-                    ))}
+                    )})}
                     {/* Preserve grid layout if less than 4 items */}
                     {chunk.length < 4 && Array.from({ length: 4 - chunk.length }).map((_, i) => (
                          <div key={`empty-${i}`} className="hidden md:block" />

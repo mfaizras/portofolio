@@ -1,0 +1,29 @@
+[
+  {
+    "id": 1,
+    "title": "E-Commerce Dashboard",
+    "description": "A comprehensive analytics dashboard for online retailers. Features real-time data visualization, inventory management, and sales forecasting using predictive algorithms.",
+    "techStack": ["React", "TypeScript", "Tailwind", "Recharts", "Node.js"],
+    "links": { "demo": "#", "github": "#" },
+    "icon": "Layers",
+    "image": "/project-ecommerce.png"
+  },
+  {
+    "id": 2,
+    "title": "AI Chat Interface",
+    "description": "Modern chat application powered by LLMs. Includes streaming responses, syntax highlighting for code blocks, and a robust history management system. Modern chat application powered by LLMs. Includes streaming responses, syntax highlighting for code blocks, and a robust history management system.Modern chat application powered by LLMs. Includes streaming responses, syntax highlighting for code blocks, and a robust history management system.Modern chat application powered by LLMs. Includes streaming responses, syntax highlighting for code blocks, and a robust history management system.Modern chat application powered by LLMs. Includes streaming responses, syntax highlighting for code blocks, and a robust history management system.Modern chat application powered by LLMs. Includes streaming responses, syntax highlighting for code blocks, and a robust history management system.Modern chat application powered by LLMs. Includes streaming responses, syntax highlighting for code blocks, and a robust history management system.Modern chat application powered by LLMs. Includes streaming responses, syntax highlighting for code blocks, and a robust history management system.Modern chat application powered by LLMs. Includes streaming responses, syntax highlighting for code blocks, and a robust history management system.Modern chat application powered by LLMs. Includes streaming responses, syntax highlighting for code blocks, and a robust history management system.Modern chat application powered by LLMs. Includes streaming responses, syntax highlighting for code blocks, and a robust history management system.Modern chat application powered by LLMs. Includes streaming responses, syntax highlighting for code blocks, and a robust history management system.Modern chat application powered by LLMs. Includes streaming responses, syntax highlighting for code blocks, and a robust history management system.Modern chat application powered by LLMs. Includes streaming responses, syntax highlighting for code blocks, and a robust history management system.Modern chat application powered by LLMs. Includes streaming responses, syntax highlighting for code blocks, and a robust history management system.Modern chat application powered by LLMs. Includes streaming responses, syntax highlighting for code blocks, and a robust history management system.",
+    "techStack": ["Next.js", "OpenAI API", "Framer Motion", "PostgreSQL"],
+    "links": { "demo": "#", "github": "#" },
+    "icon": "Code2",
+    "image": "/project-ai-chat.png"
+  },
+  {
+    "id": 3,
+    "title": "Smart Home Controller",
+    "description": "IoT interface for managing smart home devices. Supports lighting zones, temperature control, and energy monitoring with specific interactive 3D visualizations.",
+    "techStack": ["Vue.js", "Three.js", "GraphQL", "Socket.io"],
+    "links": { "demo": "#", "github": "#" },
+    "icon": "Cpu",
+    "image": "/project-smart-home.png"
+  }
+]

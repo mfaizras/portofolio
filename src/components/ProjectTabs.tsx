@@ -1,36 +1,33 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { Github, ExternalLink, Code2, Layers, Cpu } from 'lucide-react';
+import projects from '../data/projects.json'
 
-const projects = [
-  {
-    id: 1,
-    title: "E-Commerce Dashboard",
-    description: "A comprehensive analytics dashboard for online retailers. Features real-time data visualization, inventory management, and sales forecasting using predictive algorithms.",
-    techStack: ["React", "TypeScript", "Tailwind", "Recharts", "Node.js"],
-    links: { demo: "#", github: "#" },
-    icon: Layers,
-    image: "/project-ecommerce.png"
-  },
-  {
-    id: 2,
-    title: "AI Chat Interface",
-    description: "Modern chat application powered by LLMs. Includes streaming responses, syntax highlighting for code blocks, and a robust history management system. Modern chat application powered by LLMs. Includes streaming responses, syntax highlighting for code blocks, and a robust history management system.Modern chat application powered by LLMs. Includes streaming responses, syntax highlighting for code blocks, and a robust history management system.Modern chat application powered by LLMs. Includes streaming responses, syntax highlighting for code blocks, and a robust history management system.Modern chat application powered by LLMs. Includes streaming responses, syntax highlighting for code blocks, and a robust history management system.Modern chat application powered by LLMs. Includes streaming responses, syntax highlighting for code blocks, and a robust history management system.Modern chat application powered by LLMs. Includes streaming responses, syntax highlighting for code blocks, and a robust history management system.Modern chat application powered by LLMs. Includes streaming responses, syntax highlighting for code blocks, and a robust history management system.Modern chat application powered by LLMs. Includes streaming responses, syntax highlighting for code blocks, and a robust history management system.Modern chat application powered by LLMs. Includes streaming responses, syntax highlighting for code blocks, and a robust history management system.Modern chat application powered by LLMs. Includes streaming responses, syntax highlighting for code blocks, and a robust history management system.Modern chat application powered by LLMs. Includes streaming responses, syntax highlighting for code blocks, and a robust history management system.Modern chat application powered by LLMs. Includes streaming responses, syntax highlighting for code blocks, and a robust history management system.Modern chat application powered by LLMs. Includes streaming responses, syntax highlighting for code blocks, and a robust history management system.Modern chat application powered by LLMs. Includes streaming responses, syntax highlighting for code blocks, and a robust history management system.Modern chat application powered by LLMs. Includes streaming responses, syntax highlighting for code blocks, and a robust history management system.Modern chat application powered by LLMs. Includes streaming responses, syntax highlighting for code blocks, and a robust history management system.",
-    techStack: ["Next.js", "OpenAI API", "Framer Motion", "PostgreSQL"],
-    links: { demo: "#", github: "#" },
-    icon: Code2,
-    image: "/project-ai-chat.png"
-  },
-  {
-    id: 3,
-    title: "Smart Home Controller",
-    description: "IoT interface for managing smart home devices. Supports lighting zones, temperature control, and energy monitoring with specific interactive 3D visualizations.",
-    techStack: ["Vue.js", "Three.js", "GraphQL", "Socket.io"],
-    links: { demo: "#", github: "#" },
-    icon: Cpu,
-    image: "/project-smart-home.png"
+
+const iconMap: Record<string, React.FC<any>> = {
+  Code2Icon: Code2,
+  LayersIcon: Layers,
+  CpuIcon: Cpu,
+};
+
+const getIcon = (iconName: string) => {
+  if (iconName.startsWith('http')) {
+      return (props: { size?: number | string, className?: string }) => (
+          <img 
+            src={iconName} 
+            alt="icon" 
+            className={props.className}
+            style={{ 
+                width: props.size || '1em', 
+                height: props.size || '1em',
+                objectFit: 'contain' 
+            }} 
+          />
+      );
   }
-];
+  const IconComponent = iconMap[iconName];
+  return IconComponent || Code2;
+};
 
 export default function ProjectTabs() {
   const [activeTab, setActiveTab] = useState(projects[0]);
@@ -42,16 +39,19 @@ export default function ProjectTabs() {
         <div className="md:col-span-4 lg:col-span-3 flex flex-col gap-4 h-full max-h-screen overflow-y-auto overflow-x-hidden [&::-webkit-scrollbar]:w-2
   [&::-webkit-scrollbar-track]:bg-bg
   [&::-webkit-scrollbar-thumb]:bg-primary
-  dark:[&::-webkit-scrollbar-track]:bg-tertiary
+  dark:[&::-webkit-scrollbar-track]:bg-bg
   dark:[&::-webkit-scrollbar-thumb]:bg-primary">
-          {projects.map((project) => (
+          {projects.map((project) => 
+          {
+          const ProjectIcon = getIcon(project.icon);
+          return (
             <button
               key={project.id}
               onClick={() => setActiveTab(project)}
               className={`
                 group relative flex items-center gap-4 p-4 rounded-xl text-left transition-all duration-300 cursor-pointer
                 ${activeTab.id === project.id 
-                  ? "bg-bgSecondary text-heading shadow-lg scale-105" 
+                  ? "bg-bgSecondary text-heading" 
                   : "hover:bg-bgSecondary/50 text-text hover:text-heading"
                 }
               `}
@@ -69,11 +69,11 @@ export default function ProjectTabs() {
                 relative z-10 p-2.5 rounded-lg transition-colors duration-300
                 ${activeTab.id === project.id ? "bg-primary text-white" : "bg-[var(--color-bg)] text-[var(--color-text)]"}
               `}>
-                <project.icon size={22} />
+                <ProjectIcon size={22} />
               </div>
               <span className="relative z-10 font-medium text-md lg:text-lg tracking-wide">{project.title}</span>
             </button>
-          ))}
+          )})}
         </div>
 
         <div className="md:col-span-8 lg:col-span-9">

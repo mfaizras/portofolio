@@ -1,59 +1,32 @@
 import { useRef, useState, useEffect } from 'react';
 import { motion, useScroll, useTransform, useMotionValue } from 'motion/react';
 import { GraduationCap, Award, Calendar, BookOpen, ChevronRight, GripHorizontal } from 'lucide-react';
+import educationData from '../data/education.json';
 
-const educationData = [
-  {
-    id: 1,
-    type: "education",
-    title: "Bachelor of Science in Computer Science",
-    institution: "University of Technology",
-    period: "2019 - 2023",
-    description: "Graduated with Honors. Specialized in Artificial Intelligence and Software Engineering. Deeply involved in the university's coding club.",
-    icon: GraduationCap,
-    color: "from-blue-500 to-cyan-400"
-  },
-  {
-    id: 2,
-    type: "certification",
-    title: "Google Professional Cloud Architect",
-    institution: "Google Cloud",
-    period: "March 2024",
-    description: "Demonstrated proficiency in designing and planning a cloud solution architecture and managing cloud infrastructure.",
-    icon: Award,
-    color: "from-yellow-500 to-orange-400"
-  },
-  {
-    id: 3,
-    type: "certification",
-    title: "Certified Kubernetes Administrator",
-    institution: "The Linux Foundation",
-    period: "November 2023",
-    description: "Validated skills in installation, configuration, and management of production-grade Kubernetes clusters.",
-    icon: Award,
-    color: "from-blue-600 to-indigo-500"
-  },
-  {
-    id: 4,
-    type: "education",
-    title: "Full Stack Development Bootcamp",
-    institution: "Tech Academy",
-    period: "2018",
-    description: "Intensive 24-week program covering modern web technologies including React, Node.js, and Cloud Deployment.",
-    icon: BookOpen,
-    color: "from-emerald-500 to-green-400"
-  },
-  {
-      id: 5,
-      type: "education",
-      title: "Self-Paced Advanced React Patterns",
-      institution: "Epic React",
-      period: "2023",
-      description: "Mastered advanced patterns like Compound Components, Control Props, and Custom Hooks.",
-      icon: BookOpen,
-      color: "from-purple-500 to-pink-400"
-    }
-];
+const iconMap: Record<string, React.FC<any>> = {
+  GraduationCapIcon: GraduationCap,
+  AwardIcon: Award,
+  BookOpenIcon: BookOpen,
+};
+
+const getIcon = (iconName: string) => {
+  if (iconName.startsWith('http')) {
+      return (props: { size?: number | string, className?: string }) => (
+          <img 
+            src={iconName} 
+            alt="icon" 
+            className={props.className}
+            style={{ 
+                width: props.size || '1em', 
+                height: props.size || '1em',
+                objectFit: 'contain' 
+            }} 
+          />
+      );
+  }
+  const IconComponent = iconMap[iconName];
+  return IconComponent || GraduationCap;
+};
 
 export default function Education() {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -106,7 +79,9 @@ export default function Education() {
                 dragConstraints={{ right: 0, left: -(sliderWidth - containerWidth + 50) }}
                 className="flex gap-12 px-4 pt-16 pb-8"
             >
-                {educationData.map((item, index) => (
+                {educationData.map((item, index) => {
+                  const EduIcon = getIcon(item.icon);
+                return (
                     <motion.div
                         key={item.id}
                         className="relative w-[320px] shrink-0 group"
@@ -128,7 +103,7 @@ export default function Education() {
 
                                 <div className="flex items-center gap-3 mb-4 mt-2">
                                     <div className={`p-2.5 rounded-lg bg-bg border border-white/5 ${item.type === 'certification' ? 'text-tertiary' : 'text-primary'}`}>
-                                        <item.icon size={22} />
+                                        <EduIcon size={22} />
                                     </div>
                                     <span className="text-xs font-bold font-mono text-secondary uppercase tracking-widest bg-bg px-2 py-1 rounded border border-white/5">
                                         {item.period}
@@ -148,7 +123,7 @@ export default function Education() {
                              </div>
                         </div>
                     </motion.div>
-                ))}
+                )})}
             </motion.div>
         </div>
 
