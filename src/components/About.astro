@@ -1,6 +1,5 @@
 ---
 import TerminalComponent from "./TerminalComponent";
-import SkillCarousel from "./SkillCarousel";
 const logos = [
   { src: "fab fa-react", alt: "React" },
   {
@@ -38,12 +37,6 @@ const logos = [
       <div class="order-first md:order-last hidden md:block">
         <TerminalComponent client:only="react" />
       </div>
-    </div>
-    <div class="mt-10">
-      <h3 class="text-heading text-xl text-center py-10">
-        I'm also able to perform the skills below
-      </h3>
-      <SkillCarousel client:load logos={logos} />
     </div>
   </div>
 </section>

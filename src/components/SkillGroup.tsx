@@ -32,7 +32,7 @@ const getIcon = (iconName: string) => {
 
 export default function SkillGroup() {
   return (
-    <section id="skills" className="py-20 bg-bg">
+    <section id="skills" className="pt-20 pb-10 bg-bg">
       <div className="max-w-7xl mx-auto px-4">
         
         <motion.div
@@ -45,7 +45,6 @@ export default function SkillGroup() {
           <h2 className="text-3xl md:text-5xl font-bold text-heading mb-4">
             Technical Arsenal
           </h2>
-          <div className="h-1.5 w-24 bg-gradient-to-r from-primary to-tertiary rounded-full mx-auto" />
           <p className="mt-6 text-text text-lg max-w-2xl mx-auto">
             A comprehensive look at the technologies I use to bring ideas to life, categorized by domain.
           </p>

@@ -15,7 +15,7 @@ const projects = [
   {
     id: 2,
     title: "AI Chat Interface",
-    description: "Modern chat application powered by LLMs. Includes streaming responses, syntax highlighting for code blocks, and a robust history management system. ",
+    description: "Modern chat application powered by LLMs. Includes streaming responses, syntax highlighting for code blocks, and a robust history management system. Modern chat application powered by LLMs. Includes streaming responses, syntax highlighting for code blocks, and a robust history management system.Modern chat application powered by LLMs. Includes streaming responses, syntax highlighting for code blocks, and a robust history management system.Modern chat application powered by LLMs. Includes streaming responses, syntax highlighting for code blocks, and a robust history management system.Modern chat application powered by LLMs. Includes streaming responses, syntax highlighting for code blocks, and a robust history management system.Modern chat application powered by LLMs. Includes streaming responses, syntax highlighting for code blocks, and a robust history management system.Modern chat application powered by LLMs. Includes streaming responses, syntax highlighting for code blocks, and a robust history management system.Modern chat application powered by LLMs. Includes streaming responses, syntax highlighting for code blocks, and a robust history management system.Modern chat application powered by LLMs. Includes streaming responses, syntax highlighting for code blocks, and a robust history management system.Modern chat application powered by LLMs. Includes streaming responses, syntax highlighting for code blocks, and a robust history management system.Modern chat application powered by LLMs. Includes streaming responses, syntax highlighting for code blocks, and a robust history management system.Modern chat application powered by LLMs. Includes streaming responses, syntax highlighting for code blocks, and a robust history management system.Modern chat application powered by LLMs. Includes streaming responses, syntax highlighting for code blocks, and a robust history management system.Modern chat application powered by LLMs. Includes streaming responses, syntax highlighting for code blocks, and a robust history management system.Modern chat application powered by LLMs. Includes streaming responses, syntax highlighting for code blocks, and a robust history management system.Modern chat application powered by LLMs. Includes streaming responses, syntax highlighting for code blocks, and a robust history management system.Modern chat application powered by LLMs. Includes streaming responses, syntax highlighting for code blocks, and a robust history management system.",
     techStack: ["Next.js", "OpenAI API", "Framer Motion", "PostgreSQL"],
     links: { demo: "#", github: "#" },
     icon: Code2,
@@ -36,10 +36,14 @@ export default function ProjectTabs() {
   const [activeTab, setActiveTab] = useState(projects[0]);
 
   return (
-    <div className="w-full max-w-7xl mx-auto px-4 py-12">
+    <div className="w-full max-w-7xl mx-auto px-4 py-6">
       <div className="grid md:grid-cols-12 gap-8 lg:gap-12">
         
-        <div className="md:col-span-4 lg:col-span-3 flex flex-col gap-4 max-h-screen overflow-y-auto overflow-x-hidden">
+        <div className="md:col-span-4 lg:col-span-3 flex flex-col gap-4 h-full max-h-screen overflow-y-auto overflow-x-hidden [&::-webkit-scrollbar]:w-2
+  [&::-webkit-scrollbar-track]:bg-bg
+  [&::-webkit-scrollbar-thumb]:bg-primary
+  dark:[&::-webkit-scrollbar-track]:bg-tertiary
+  dark:[&::-webkit-scrollbar-thumb]:bg-primary">
           {projects.map((project) => (
             <button
               key={project.id}
@@ -118,7 +122,11 @@ export default function ProjectTabs() {
               </div>
 
               {/* Content Details */}
-              <div className="relative z-20 px-8 pb-10 -mt-20 max-h-screen overflow-y-auto">
+              <div className="relative z-20 px-8 pb-10 -mt-20 h-full max-h-screen overflow-y-auto [&::-webkit-scrollbar]:w-2
+  [&::-webkit-scrollbar-track]:bg-bg
+  [&::-webkit-scrollbar-thumb]:bg-primary
+  dark:[&::-webkit-scrollbar-track]:bg-tertiary
+  dark:[&::-webkit-scrollbar-thumb]:bg-primary">
                 <div className="bg-bgSecondary/80 backdrop-blur-xl p-8 rounded-2xl border border-secondary/10 shadow-inner">
                   <div className="mb-6">
                     <h2 className="text-lg md:text-2xl font-bold text-heading mb-3">

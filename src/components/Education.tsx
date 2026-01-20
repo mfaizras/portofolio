@@ -69,11 +69,7 @@ export default function Education() {
   }, []);
 
   return (
-    <section id="education" className="py-20 bg-bg relative overflow-hidden">
-      
-      {/* Background Elements */}
-      <div className="absolute top-20 left-0 w-full h-[500px] bg-gradient-to-r from-primary/5 via-transparent to-primary/5 opacity-50 pointer-events-none" />
-
+    <section id="education" className="bg-bg py-20 relative overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 relative z-10">
         
         {/* Header */}
@@ -88,7 +84,6 @@ export default function Education() {
             <h2 className="text-3xl md:text-5xl font-bold text-heading mb-4">
               Education & Path
             </h2>
-            <div className="h-1.5 w-24 bg-gradient-to-r from-primary to-tertiary rounded-full" />
             <p className="text-text text-lg mt-4 max-w-xl">
               Academic background and certifications. Drag to explore.
             </p>
@@ -103,13 +98,13 @@ export default function Education() {
         <div ref={containerRef} className="relative w-full cursor-grab active:cursor-grabbing overflow-hidden">
             
             {/* Visual Line Background - Centered */}
-            <div className="absolute top-[28px] left-0 w-full h-0.5 bg-gradient-to-r from-bgSecondary via-primary/30 to-bgSecondary z-0" />
+            <div className="absolute top-[34px] left-0 w-full h-0.5 bg-gradient-to-r from-bgSecondary via-primary/30 to-bgSecondary z-0" />
 
             <motion.div 
                 ref={sliderRef}
                 drag="x"
                 dragConstraints={{ right: 0, left: -(sliderWidth - containerWidth + 50) }}
-                className="flex gap-12 px-4 py-8"
+                className="flex gap-12 px-4 pt-16 pb-8"
             >
                 {educationData.map((item, index) => (
                     <motion.div

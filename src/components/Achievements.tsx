@@ -104,7 +104,6 @@ export default function Achievements() {
           <h2 className="text-3xl md:text-5xl font-bold text-heading mb-6">
             Achievements
           </h2>
-          <div className="h-1.5 w-24 bg-gradient-to-r from-primary to-tertiary rounded-full mx-auto" />
           <p className="mt-6 text-text text-lg max-w-2xl mx-auto">
             Milestones that mark my journey in technology.
           </p>
