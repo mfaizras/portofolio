@@ -1,0 +1,64 @@
+[
+  {
+    "id": "frontend",
+    "title": "Frontend Engineering",
+    "description": "Building immersive, performant, and accessible web interfaces using the modern ecosystem.",
+    "icon": "FrontendIcon",
+    "color": "text-blue-400",
+    "bgGradient": "from-blue-500/10 to-transparent",
+    "skills": [
+        { "name": "React", "level": "Expert", "icon": "GenericCodeIcon" },
+        { "name": "TypeScript", "level": "Expert", "icon": "GenericCodeIcon" },
+        { "name": "Tailwind CSS", "level": "Expert", "icon": "GenericCodeIcon" },
+        { "name": "Next.js", "level": "Advanced", "icon": "GenericCodeIcon" },
+        { "name": "Astro", "level": "Advanced", "icon": "GenericCodeIcon" },
+        { "name": "Framer Motion", "level": "Intermediate", "icon": "GenericCodeIcon" }
+    ]
+  },
+  {
+    "id": "backend",
+    "title": "Backend & Systems",
+    "description": "Architecting robust server-side logic, APIs, and scalable microservices.",
+    "icon": "BackendIcon",
+    "color": "text-green-400",
+    "bgGradient": "from-green-500/10 to-transparent",
+    "skills": [
+        { "name": "Node.js", "level": "Expert", "icon": "https://nodejs.org/static/logos/jsIconGreen.svg" },
+        { "name": "Go", "level": "Intermediate", "icon": "GenericCodeIcon" },
+        { "name": "PostgreSQL", "level": "Advanced", "icon": "GenericCodeIcon" },
+        { "name": "Redis", "level": "Intermediate", "icon": "GenericCodeIcon" },
+        { "name": "GraphQL", "level": "Advanced", "icon": "GenericCodeIcon" },
+        { "name": "NestJS", "level": "Advanced", "icon": "GenericCodeIcon" },
+        { "name": "Laravel", "level": "Advanced", "icon": "https://upload.wikimedia.org/wikipedia/commons/9/9a/Laravel.svg" }
+    ]
+  },
+  {
+    "id": "devops",
+    "title": "DevOps & Cloud",
+    "description": "Ensuring reliability and velocity with automated pipelines and cloud infrastructure.",
+    "icon": "CloudIcon",
+    "color": "text-orange-400",
+    "bgGradient": "from-orange-500/10 to-transparent",
+    "skills": [
+        { "name": "Docker", "level": "Advanced", "icon": "GenericCodeIcon" },
+        { "name": "Kubernetes", "level": "Intermediate", "icon": "GenericCodeIcon" },
+        { "name": "AWS", "level": "Advanced", "icon": "GenericCodeIcon" },
+        { "name": "CI/CD", "level": "Advanced", "icon": "GenericCodeIcon" },
+        { "name": "Terraform", "level": "Intermediate", "icon": "GenericCodeIcon" }
+    ]
+  },
+  {
+    "id": "tools",
+    "title": "Workflow & Tools",
+    "description": "Optimizing developer experience and code quality with industry-standard tools.",
+    "icon": "ToolsIcon",
+    "color": "text-purple-400",
+    "bgGradient": "from-purple-500/10 to-transparent",
+    "skills": [
+        { "name": "Git", "level": "Expert", "icon": "GenericCodeIcon" },
+        { "name": "Figma", "level": "Intermediate", "icon": "GenericCodeIcon" },
+        { "name": "Jest/Vitest", "level": "Advanced", "icon": "GenericCodeIcon" },
+        { "name": "Linux", "level": "Advanced", "icon": "GenericCodeIcon" }
+    ]
+  }
+]
