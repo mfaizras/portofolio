@@ -186,12 +186,14 @@ vec3 getColor(vec2 p){
 
     float middle = digit(p);
     
-    const float off = 0.002;
-    float sum = digit(p + vec2(-off, -off)) + digit(p + vec2(0.0, -off)) + digit(p + vec2(off, -off)) +
-                digit(p + vec2(-off, 0.0)) + digit(p + vec2(0.0, 0.0)) + digit(p + vec2(off, 0.0)) +
-                digit(p + vec2(-off, off)) + digit(p + vec2(0.0, off)) + digit(p + vec2(off, off));
+    // Optimized: Removed expensive 9-tap neighbor sampling used for glow.
+    // If glow is needed, use a post-processing bloom or single-pass approximation.
+    // const float off = 0.002;
+    // float sum = digit(p + vec2(-off, -off)) + digit(p + vec2(0.0, -off)) + digit(p + vec2(off, -off)) +
+    //             digit(p + vec2(-off, 0.0)) + digit(p + vec2(0.0, 0.0)) + digit(p + vec2(off, 0.0)) +
+    //             digit(p + vec2(-off, off)) + digit(p + vec2(0.0, off)) + digit(p + vec2(off, off));
     
-    vec3 baseColor = vec3(0.9) * middle + sum * 0.1 * vec3(1.0) * bar;
+    vec3 baseColor = vec3(0.9) * middle * bar;
     return baseColor;
 }
 
@@ -274,6 +276,8 @@ export default function FaultyTerminal({
   const rafRef = useRef<number>(0);
   const loadAnimationStartRef = useRef<number>(0);
   const timeOffsetRef = useRef<number>(Math.random() * 100);
+  const isVisibleRef = useRef(true);
+  const observerRef = useRef<IntersectionObserver | null>(null);
 
   const tintVec = useMemo(() => hexToRgb(tint), [tint]);
 
@@ -350,6 +354,8 @@ export default function FaultyTerminal({
     const update = (t: number) => {
       rafRef.current = requestAnimationFrame(update);
 
+      if (!isVisibleRef.current) return; // Optimization: Skip rendering when out of viewport
+
       if (pageLoadAnimation && loadAnimationStartRef.current === 0) {
         loadAnimationStartRef.current = t;
       }
@@ -388,9 +394,16 @@ export default function FaultyTerminal({
 
     if (mouseReact) ctn.addEventListener('mousemove', handleMouseMove);
 
+    // Intersection Observer to stop rendering when not visible
+    observerRef.current = new IntersectionObserver(([entry]) => {
+      isVisibleRef.current = entry.isIntersecting;
+    });
+    observerRef.current.observe(ctn);
+
     return () => {
       cancelAnimationFrame(rafRef.current);
       resizeObserver.disconnect();
+      observerRef.current?.disconnect();
       if (mouseReact) ctn.removeEventListener('mousemove', handleMouseMove);
       if (gl.canvas.parentElement === ctn) ctn.removeChild(gl.canvas);
       gl.getExtension('WEBGL_lose_context')?.loseContext();

@@ -92,6 +92,7 @@ export default function ProjectTabs() {
                   transition={{ duration: 0.8 }}
                   src={activeTab.image} 
                   alt={activeTab.title} 
+                  loading="lazy"
                   className="w-full h-full object-cover object-center"
                 />
                 

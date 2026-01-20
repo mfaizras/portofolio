@@ -18,37 +18,52 @@ export default function FloatingNavbar() {
   const [activeSection, setActiveSection] = useState('');
 
   useEffect(() => {
-    const handleScroll = () => {
-      const aboutSection = document.getElementById('about');
-      const heroSection = document.getElementById('hero'); // Assuming hero is at top
-
-      if (aboutSection) {
-        // Show navbar when passed the hero section (or entering about)
-        const threshold = aboutSection.offsetTop - 100;
-        if (window.scrollY > threshold) {
-          setIsVisible(true);
-        } else {
-          setIsVisible(false);
-        }
-      }
-
-      // Determine active section for highlighting
-      const sections = navLinks.map(link => link.href.substring(1));
-      let current = '';
-      for (const section of sections) {
-        const element = document.getElementById(section);
-        if (element) {
-          const rect = element.getBoundingClientRect();
-          if (rect.top <= 150 && rect.bottom >= 150) {
-            current = section;
-          }
-        }
-      }
-      setActiveSection(current);
+    // Optimization: Use IntersectionObserver for active section highlighting
+    // This avoids querying the DOM and forcing reflows on every scroll frame
+    const observerOptions = {
+      root: null,
+      rootMargin: '-20% 0px -60% 0px', // Active triggers when section is near top/middle
+      threshold: 0
     };
 
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    const observerCallback = (entries: IntersectionObserverEntry[]) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          setActiveSection(entry.target.id);
+        }
+      });
+    };
+
+    const observer = new IntersectionObserver(observerCallback, observerOptions);
+    
+    navLinks.forEach(link => {
+      const sectionId = link.href.substring(1);
+      const element = document.getElementById(sectionId);
+      if (element) observer.observe(element);
+    });
+
+    // Optimization: Throttled scroll listener for navbar visibility only
+    let ticking = false;
+    const handleScroll = () => {
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+            const aboutSection = document.getElementById('about');
+            if (aboutSection) {
+                const threshold = aboutSection.offsetTop - 100;
+                setIsVisible(window.scrollY > threshold);
+            }
+            ticking = false;
+        });
+        ticking = true;
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true }); // passive for performance
+
+    return () => {
+      observer.disconnect();
+      window.removeEventListener('scroll', handleScroll);
+    };
   }, []);
 
   const scrollToSection = (href: string) => {
@@ -66,9 +81,9 @@ export default function FloatingNavbar() {
           animate={{ y: 0, opacity: 1, x: '-50%' }}
           exit={{ y: -100, opacity: 0, x: '-50%' }}
           transition={{ duration: 0.3 }}
-          className="fixed top-6 left-1/2 z-50"
+          className="fixed top-6 left-1/2 z-50 pointer-events-none" // pointer-events-none on wrapper to pass clicks through if needed
         >
-          <nav className="flex items-center gap-1 bg-bgSecondary/80 backdrop-blur-md border border-white/10 rounded-full px-2 py-1.5 shadow-2xl">
+          <nav className="flex items-center gap-1 bg-bgSecondary/80 backdrop-blur-md border border-white/10 rounded-full px-2 py-1.5 shadow-2xl pointer-events-auto">
             
             <button 
                 onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}

@@ -19,6 +19,7 @@ const getIcon = (iconName: string) => {
           <img 
             src={iconName} 
             alt="icon" 
+            loading="lazy"
             className={props.className}
             style={{ 
                 width: props.size || '1em', 

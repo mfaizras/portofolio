@@ -13,6 +13,7 @@ export default function SplashScreen({ onComplete }: { onComplete?: () => void }
       setIsLoading(false);
       // Unlock scroll
       document.body.style.overflow = 'unset';
+      window.dispatchEvent(new CustomEvent('splash-complete'));
       if (onComplete) onComplete();
     }, 2500); // 2.5 seconds total duration
 
