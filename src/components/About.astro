@@ -10,6 +10,7 @@ const logos = [
   { src: "fab fa-php", alt: "PHP" },
   { src: "fab fa-golang", alt: "Golang" },
 ];
+import aboutData from "../data/hero.json";
 ---
 
 <section
@@ -23,16 +24,21 @@ const logos = [
     <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
       <div class="order-last md:order-first">
         <p class="text-text text-lg">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam nec
-          metus nec ante vestibulum finibus. Nullam nec metus nec ante
-          vestibulum finibus. Nullam nec metus nec ante vestibulum finibus.
+          {aboutData.aboutDesc}
         </p>
 
-        <div class="mt-7">
-          <a href="" class="font-bold button text-heading p-3 rounded"
-            >Download CV</a
-          >
-        </div>
+        {
+          aboutData.cvLink ? (
+            <div class="mt-7">
+              <a
+                href={aboutData.cvLink}
+                class="font-bold button text-heading p-3 rounded"
+              >
+                Download CV
+              </a>
+            </div>
+          ) : null
+        }
       </div>
       <div class="order-first md:order-last hidden md:block">
         <TerminalComponent client:only="react" />

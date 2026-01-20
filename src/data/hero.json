@@ -1,0 +1,10 @@
+{
+    "heroIntroduce" : "Hello 👋 I'm",
+    "heroName" : "Muhammad Faiz Rashid",
+    "heroDesc" : {
+        "desc" : "I'm An",
+        "role" : ["Fullstack Developer","Web Developer","Competitive Programmer Player"]
+    },
+    "aboutDesc" : "",
+    "cvLink" : ""
+}

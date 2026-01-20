@@ -2,6 +2,8 @@ import RotatingText from './RotatingText'
 import FaultyTerminal from './FaultyTerminal';
 import SocialButton from './SocialButton';
 import './Hero.css';
+import heroData from '../data/hero.json';
+import SocialMediaData from '../data/socialMedia.json';
 
 export default function Hero() {
     return (
@@ -29,16 +31,16 @@ export default function Hero() {
         />
         </div>
           <div className="absolute text-center text-heading cursor-default">
-            <span className='text-2xl'>Hello 👋 I'm</span>
+            <span className='text-2xl'>{heroData.heroIntroduce}</span>
                 <h1 className="text-heading text-8xl hero-heading">
-                  Muhammad Faiz Rashid
+                  {heroData.heroName}
                 </h1>
                 <div className='flex items-center justify-center'>
                 <h2 className='text-3xl text-heading gap-3'>
-                  I'm An 
+                  {heroData.heroDesc.desc}
                 </h2>
                 <RotatingText
-                texts={['Programmer','Fullstack Developer','Gamer','Student']}
+                texts={heroData.heroDesc.role}
                 mainClassName="mx-3 px-2 sm:px-2 md:px-3 bg-primary text-heading overflow-hidden py-0.5 sm:py-1 md:py-2 justify-center rounded-lg text-3xl"
                 staggerFrom={"last"}
                 initial={{ y: "100%" }}
@@ -51,9 +53,9 @@ export default function Hero() {
               />
                 </div>
               <div className='cursor-auto mt-10 gap-3'>
-                <SocialButton icon="fab fa-github" link="https://github.com/yourusername" />
-                <SocialButton icon="fab fa-linkedin" link="https://linkedin.com/in/yourusername" />
-                <SocialButton icon="fab fa-twitter" link="https://twitter.com/yourusername" />
+                {SocialMediaData.map((social) => (
+                  <SocialButton key={social.id} icon={social.icon} link={social.href} />
+                ))}
               </div>
           </div>
         </section>
