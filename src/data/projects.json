@@ -1,29 +1,75 @@
 [
   {
     "id": 1,
-    "title": "E-Commerce Dashboard",
-    "description": "A comprehensive analytics dashboard for online retailers. Features real-time data visualization, inventory management, and sales forecasting using predictive algorithms.",
-    "techStack": ["React", "TypeScript", "Tailwind", "Recharts", "Node.js"],
-    "links": { "demo": "#", "github": "#" },
-    "icon": "Layers",
-    "image": "/project-ecommerce.png"
+    "title": "Inizio woman",
+    "description": "Inizio Woman is a women's fashion catalog website that I developed from an initial static version based on Google Drive into a fully dynamic web platform with an integrated admin panel. The system allows administrators to manage products, categories, images, and product details through a backend interface, enabling real-time content updates without manual file changes. On the user side, the website provides a clean and responsive interface for browsing apparel collections, viewing detailed product information, and exploring variations in color and size. This transformation significantly improved content management efficiency, scalability, and overall user experience.",
+    "techStack": ["Laravel", "MySQL"],
+    "links": { "demo": "https://iniziowoman.com/" },
+    "icon": "Code2Icon",
+    "image": "/assets/projects/inizio-woman.png"
+  },
+  {
+    "id": 11,
+    "title": "AI Learning Insight",
+    "description": "AI Learning Insight is a machine learning–based system developed as my capstone project for the Asah by Dicoding program, where it received the Best Capstone award.The project focuses on classifying students’ learning styles using a supervised machine learning model to support personalized education strategies. \nI designed and trained an end-to-end ML pipeline that includes data preprocessing, feature engineering, model training, evaluation, and deployment readiness. The model analyzes student behavioral and learning activity data to predict learning style categories, enabling data-driven insights for educators.",
+    "techStack": ["Python", "Scikit-Learn", "FastAPI","Docker"],
+    "links": { "demo": "https://a25-cs231.mewdev.web.id/" },
+    "icon": "Code2Icon",
+    "image": "/assets/projects/ai-learning.png"
+  },
+  {
+    "id": 5,
+    "title": "RailBot API",
+    "description": "LLM-based conversational application developed during a hackathon to provide train schedule information through natural language interaction. The chatbot allows users to query departure times, routes, and availability, and returns relevant schedule details in a conversational format. The system integrates a large language model with structured schedule data to interpret user queries, extract key parameters (origin, destination, date, time), and generate accurate, human-like responses. \nIn addition to schedule queries, the project implements a Knowledge-Based Authentication (KBA) mechanism powered by an LLM. This feature processes authentication questions derived from a user's booking history, enabling identity verification through personalized, context-aware questions generated and validated by the model.Although the project did not win the hackathon, it demonstrates rapid prototyping, LLM integration, and end-to-end system design under time constraints, as well as practical applications of LLMs in conversational systems and adaptive authentication.",
+    "techStack": ["Python", "Gemini LLM", "Chroma Vector DB", "RAG Architecture","LangChain"],
+    "links": { "demo": "https://www.youtube.com/watch?v=DmLei8X8Dsg", "github": "https://github.com/mfaizras/compsphere-microservice-krl" },
+    "icon": "Code2Icon",
+    "image": "/assets/projects/railbot.png"
+  },
+  {
+    "id": 8,
+    "title": "Customate Omnichannel",
+    "description": "Laravel-based web application designed to centralize customer communications across multiple channels into a single unified interface.The platform enables real-time messaging and conversation management, allowing businesses to handle customer interactions efficiently from one dashboard. In this project, I implemented a real-time messaging system using WebSockets (Ably) to deliver instant message updates without page refresh. The system supports live chat features, message broadcasting, and conversation synchronization across clients, ensuring low-latency and reliable communication. \nThe platform is also integrated with an AI-powered LLM module that processes incoming user messages based on a dynamic knowledge base. Administrators can add, update, and manage knowledge entries through the Laravel backend, allowing the LLM to respond contextually according to the latest business information. Every message received from any connected channel is routed through the LLM, which interprets user intent and generates responses grounded in the stored knowledge. This architecture enables scalable, context-aware automation while keeping full control over the knowledge used by the AI. \nThis project demonstrates experience in real-time systems, WebSocket integration, backend-driven knowledge management, and practical LLM orchestration within a Laravel-based omnichannel platform.",
+    "techStack": ["Laravel", "Ably Websockets", "ReactJS", "Tailwind CSS","Chroma Vector DB", "RAG Architecture","LangChain"],
+    "links": { "github": "https://github.com/mfaizras/omnichannel" },
+    "icon": "Code2Icon",
+    "image": "/assets/projects/customate.png"
+  },
+  {
+    "id": 10,
+    "title": "Customate LLM Adapter",
+    "description": "Customate AI Microservice is a backend LLM adapter microservice designed to support AI-driven features in larger applications, such as the Omnichannel messaging platform. Built with FastAPI and integrated with Chroma as a vector database, this service handles knowledge embedding storage, semantic search, and dynamic knowledge augmentation for contextual LLM responses. \nThe microservice exposes RESTful endpoints for managing knowledge entries, generating embeddings, performing vector similarity search, and processing contextual LLM queries. By acting as a dedicated AI backend, it enables other systems to interact with large language models through a clean and scalable API layer. \nThis service serves as a core component for:\n- dynamic knowledge base management,\n- retrieval-augmented generation (RAG),\n- and LLM-powered message processing in real-time applications.\n The architecture demonstrates practical experience in LLM orchestration, vector database integration (Chroma), and production-ready microservice design.",
+    "techStack": ["Python", "FastAPI", "Chroma Vector DB", "RAG Architecture","LangChain"],
+    "links": { "github": "https://github.com/mfaizras/customate-ai-microservice" },
+    "icon": "Code2Icon",
+    "image": "/assets/projects/customate.png"
+  },
+    {
+    "id": 3,
+    "title": "Gunadarma Telegram Chatbot ",
+    "description": "Developed a Telegram-based information chatbot for Gunadarma University using Python, Retrieval-Augmented Generation (RAG) pipeline and Gemini LLM to generate accurate and context-aware responses. Implemented natural-language query handling, document retrieval, and LLM-based answer generation as part of the University of Gunadarma Scientific Writing Project. ",
+    "techStack": ["Python", "Gemini LLM", "Chroma Vector DB","RAG Architecturee"],
+    "links": { "demo": "https://web.telegram.org/k/#@infogundar_bot" },
+    "icon": "Code2",
+    "image": "/assets/projects/ug-telebot.png"
+  },
+    {
+    "id": 4,
+    "title": "InstrumentasiBK",
+    "description": "Instrumentasi BK is a dynamic guidance and counseling assessment system. My role focused on system maintenance and the development of non-cognitive assessment instruments, such as personality screening tools. I implemented questionnaire logic, scoring mechanisms, several feature, and data handling workflows to support digital assessments and structured result reporting. The system emphasizes usability, data integrity, and backend-driven processing to enhance counseling operations.",
+    "techStack": ["CodeIgniter", "MySQL", "Bootstrap", "jQuery"],
+    "links": { "demo": "https://instrumentasibk.com/" },
+    "icon": "Code2Icon",
+    "image": "/assets/projects/instrumeentasi-bk.png"
   },
   {
     "id": 2,
-    "title": "AI Chat Interface",
-    "description": "Modern chat application powered by LLMs. Includes streaming responses, syntax highlighting for code blocks, and a robust history management system. Modern chat application powered by LLMs. Includes streaming responses, syntax highlighting for code blocks, and a robust history management system.Modern chat application powered by LLMs. Includes streaming responses, syntax highlighting for code blocks, and a robust history management system.Modern chat application powered by LLMs. Includes streaming responses, syntax highlighting for code blocks, and a robust history management system.Modern chat application powered by LLMs. Includes streaming responses, syntax highlighting for code blocks, and a robust history management system.Modern chat application powered by LLMs. Includes streaming responses, syntax highlighting for code blocks, and a robust history management system.Modern chat application powered by LLMs. Includes streaming responses, syntax highlighting for code blocks, and a robust history management system.Modern chat application powered by LLMs. Includes streaming responses, syntax highlighting for code blocks, and a robust history management system.Modern chat application powered by LLMs. Includes streaming responses, syntax highlighting for code blocks, and a robust history management system.Modern chat application powered by LLMs. Includes streaming responses, syntax highlighting for code blocks, and a robust history management system.Modern chat application powered by LLMs. Includes streaming responses, syntax highlighting for code blocks, and a robust history management system.Modern chat application powered by LLMs. Includes streaming responses, syntax highlighting for code blocks, and a robust history management system.Modern chat application powered by LLMs. Includes streaming responses, syntax highlighting for code blocks, and a robust history management system.Modern chat application powered by LLMs. Includes streaming responses, syntax highlighting for code blocks, and a robust history management system.Modern chat application powered by LLMs. Includes streaming responses, syntax highlighting for code blocks, and a robust history management system.Modern chat application powered by LLMs. Includes streaming responses, syntax highlighting for code blocks, and a robust history management system.",
-    "techStack": ["Next.js", "OpenAI API", "Framer Motion", "PostgreSQL"],
-    "links": { "demo": "#", "github": "#" },
-    "icon": "Code2",
-    "image": "/project-ai-chat.png"
-  },
-  {
-    "id": 3,
-    "title": "Smart Home Controller",
-    "description": "IoT interface for managing smart home devices. Supports lighting zones, temperature control, and energy monitoring with specific interactive 3D visualizations.",
-    "techStack": ["Vue.js", "Three.js", "GraphQL", "Socket.io"],
-    "links": { "demo": "#", "github": "#" },
-    "icon": "Cpu",
-    "image": "/project-smart-home.png"
+    "title": "Discord BOT Assignment Reminder",
+    "description": "A task-reminder and news-notification bot built using Python, featuring automated web scraping from multiple gunadarma university portals (V-Class, IFLab, BAAK, and Student Site) to collect upcoming assignments and announcements. The bot processes the scraped data, schedules reminders, and sends notifications to users through Discord, providing a reliable automated system for academic task tracking and daily productivity. ",
+    "techStack": ["Python", "BeautifoulSoup"],
+    "links": { "github": "https://github.com/mfaizras/tugas-bot" },
+    "icon": "Code2Icon",
+    "image": "/assets/projects/tugas-bot.png"
   }
+
 ]

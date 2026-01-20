@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { motion } from 'motion/react';
 import { Mail, MapPin, Send, Github, Linkedin, Twitter, Instagram,Facebook, ExternalLink } from 'lucide-react';
 import SocialData from '../data/socialMedia.json';
+import ContactData from '../data/hero.json';
 
 export default function Contact() {
   const [formState, setFormState] = useState({
@@ -46,7 +47,7 @@ export default function Contact() {
             Let's Work Together
           </h2>
           <p className="mt-6 text-text text-lg max-w-2xl mx-auto">
-            Have a project in mind or just want to chat? I'm always open to discussing new opportunities and ideas.
+            {ContactData.contactDesc}
           </p>
         </motion.div>
 
@@ -61,7 +62,7 @@ export default function Contact() {
             >
                 <h3 className="text-2xl font-bold text-heading mb-6">Get in Touch</h3>
                 <p className="text-text leading-relaxed mb-10">
-                    I'm currently available for freelance projects and full-time opportunities. If you have a question or just want to say hi, I'll try my best to get back to you!
+                    {ContactData.getInTouchText}
                 </p>
 
                 <div className="space-y-6 mb-12">
@@ -71,8 +72,8 @@ export default function Contact() {
                         </div>
                         <div>
                             <h4 className="text-heading font-semibold mb-1">Email</h4>
-                            <a href="mailto:hello@example.com" className="text-secondary hover:text-primary transition-colors">
-                                hello@example.com
+                            <a href={`mailto:${ContactData.email}`} className="text-secondary hover:text-primary transition-colors">
+                                {ContactData.email}
                             </a>
                         </div>
                     </div>
@@ -84,7 +85,7 @@ export default function Contact() {
                         <div>
                             <h4 className="text-heading font-semibold mb-1">Location</h4>
                             <p className="text-text">
-                                Jakarta, Indonesia
+                                {ContactData.location}
                             </p>
                         </div>
                     </div>
@@ -182,7 +183,7 @@ export default function Contact() {
 
         {/* Footer Copyright */}
         <div className="mt-24 pt-8 border-t border-white/5 text-center text-text/50 text-sm">
-            <p>&copy; {new Date().getFullYear()} Your Name. All rights reserved.</p>
+            <p>&copy; {new Date().getFullYear()} {ContactData.footerName}. All rights reserved.</p>
         </div>
 
       </div>

@@ -1,22 +1,14 @@
 [
     {
         "icon": "fab fa-linkedin",
-        "href": "#"
+        "href": "https://www.linkedin.com/in/faizrash/"
     },
     {
         "icon": "fab fa-github",
-        "href": "#"
-    },
-    {
-        "icon": "fab fa-twitter",
-        "href": "#"
+        "href": "https://github.com/mfaizras"
     },
     {
         "icon": "fab fa-instagram",
-        "href": "#"
-    },
-    {
-        "icon": "fab fa-facebook",
-        "href": "#"
+        "href": "https://www.instagram.com/faizras_/"
     }
 ]

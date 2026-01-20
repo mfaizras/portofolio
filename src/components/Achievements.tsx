@@ -135,6 +135,11 @@ export default function Achievements() {
                               <p className="text-sm text-text leading-relaxed">
                                 {item.description}
                               </p>
+                              {item.link && (
+                                <a href={item.link} target="_blank" rel="noopener noreferrer" className="text-primary hover:underline mt-2">
+                                  {item.label || "Learn More"}
+                                </a>
+                              )}
                             </div>
                          </div>
                       </motion.div>

@@ -13,16 +13,13 @@ const iconMap: Record<string, React.FC<any>> = {
 const getIcon = (iconName: string) => {
   if (iconName.startsWith('http')) {
       return (props: { size?: number | string, className?: string }) => (
-          <img 
-            src={iconName} 
-            alt="icon" 
-            className={props.className}
-            style={{ 
+        <svg
+        className={props.className}
+        style={{ 
                 width: props.size || '1em', 
                 height: props.size || '1em',
                 objectFit: 'contain' 
-            }} 
-          />
+            }} ><use href={iconName}></use></svg>
       );
   }
   const IconComponent = iconMap[iconName];
@@ -69,7 +66,7 @@ export default function ProjectTabs() {
                 relative z-10 p-2.5 rounded-lg transition-colors duration-300
                 ${activeTab.id === project.id ? "bg-primary text-white" : "bg-[var(--color-bg)] text-[var(--color-text)]"}
               `}>
-                <ProjectIcon size={22} />
+                <ProjectIcon size={22}/>
               </div>
               <span className="relative z-10 font-medium text-md lg:text-lg tracking-wide">{project.title}</span>
             </button>
@@ -100,6 +97,7 @@ export default function ProjectTabs() {
                 
                 {/* Floating Action Buttons */}
                 <div className="absolute top-6 right-6 z-20 flex gap-3">
+                  {activeTab.links.github && (
                   <motion.a 
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
@@ -109,6 +107,8 @@ export default function ProjectTabs() {
                     <Github size={18} />
                     <span className="text-sm font-medium">Code</span>
                   </motion.a>
+                  )}
+                  {activeTab.links.demo && (
                   <motion.a 
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
@@ -118,6 +118,8 @@ export default function ProjectTabs() {
                     <ExternalLink size={18} />
                     <span className="text-sm font-bold">Live Demo</span>
                   </motion.a>
+
+                  )}
                 </div>
               </div>
 
@@ -135,7 +137,7 @@ export default function ProjectTabs() {
                     <div className="h-1.5 w-24 bg-gradient-to-r from-primary to-tertiary rounded-full" />
                   </div>
 
-                  <p className="text-text text-md md:text-lg leading-relaxed mb-8 max-w-3xl">
+                  <p className="text-text text-md md:text-lg leading-relaxed mb-8 max-w-3xl text-justify" style={{ whiteSpace: 'pre-wrap' }}>
                     {activeTab.description}
                   </p>
 

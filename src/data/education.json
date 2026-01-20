@@ -2,51 +2,41 @@
   {
     "id": 1,
     "type": "education",
-    "title": "Bachelor of Science in Computer Science",
-    "institution": "University of Technology",
-    "period": "2019 - 2023",
-    "description": "Graduated with Honors. Specialized in Artificial Intelligence and Software Engineering. Deeply involved in the university's coding club.",
+    "title": "Bachelor of Computer Science in Informatics",
+    "institution": "Gunadarma University",
+    "period": "2022 - 2026",
+    "description": "Final-Year Student (7th Semester), expected graduation in 2026.",
     "icon": "GraduationCapIcon",
     "color": "from-blue-500 to-cyan-400"
   },
   {
     "id": 2,
-    "type": "certification",
-    "title": "Google Professional Cloud Architect",
-    "institution": "Google Cloud",
-    "period": "March 2024",
-    "description": "Demonstrated proficiency in designing and planning a cloud solution architecture and managing cloud infrastructure.",
-    "icon": "AwardIcon",
+    "type": "education",
+    "title": "Machine Learning Engineer",
+    "institution": "Asah By Dicoding",
+    "period": "2025 - 2026",
+    "description": "Mastered machine learning concepts and applied them to real-world problems.",
+    "icon": "BookOpenIcon",
     "color": "from-yellow-500 to-orange-400"
   },
   {
     "id": 3,
-    "type": "certification",
-    "title": "Certified Kubernetes Administrator",
-    "institution": "The Linux Foundation",
-    "period": "November 2023",
-    "description": "Validated skills in installation, configuration, and management of production-grade Kubernetes clusters.",
+    "type": "education",
+    "title": "Basic Audio Engineering",
+    "institution": "Badan Nasional Sertifikasi Propesi",
+    "period": "May 2022",
+    "description": "Mastered audio engineering concepts and applied them to real-world problems.",
     "icon": "AwardIcon",
-    "color": "from-blue-600 to-indigo-500"
+    "color": "from-green-500 to-blue-400"
   },
   {
     "id": 4,
     "type": "education",
-    "title": "Full Stack Development Bootcamp",
-    "institution": "Tech Academy",
-    "period": "2018",
-    "description": "Intensive 24-week program covering modern web technologies including React, Node.js, and Cloud Deployment.",
-    "icon": "BookOpenIcon",
-    "color": "from-emerald-500 to-green-400"
-  },
-  {
-      "id": 5,
-      "type": "education",
-      "title": "Self-Paced Advanced React Patterns",
-      "institution": "Epic React",
-      "period": "2023",
-      "description": "Mastered advanced patterns like Compound Components, Control Props, and Custom Hooks.",
-      "icon": "BookOpenIcon",
-      "color": "from-purple-500 to-pink-400"
-    }
+    "title": "Communication and Electronic Engineering",
+    "institution": "SMKN 26 Jakarta",
+    "period": "2019 - 2022",
+    "description": "Graduate With Great Average Score",
+    "icon": "GraduationIcon ",
+    "color": "from-purple-500 to-blue-400"
+  }
 ]

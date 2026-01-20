@@ -20,10 +20,10 @@ export default function BlogSection() {
         >
           <div>
             <h2 className="text-3xl md:text-5xl font-bold text-heading mb-4">
-              Latest Insights
+              Latest Posts
             </h2>
             <p className="mt-4 text-text text-lg max-w-xl">
-              Thoughts on technology, coding patterns, and the ever-evolving landscape of software engineering.
+              
             </p>
           </div>
           {postsData.length > 0 && (

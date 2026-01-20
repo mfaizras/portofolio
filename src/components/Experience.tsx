@@ -23,10 +23,10 @@ export default function Experience() {
            className="mb-16 md:mb-24"
         >
           <h2 className="text-3xl md:text-5xl font-bold text-heading mb-4">
-            Professional Journey
+            {experienceData.title}
           </h2>
           <p className="mt-6 text-text text-lg max-w-2xl">
-            My career path and the impactful roles I've held in the tech industry.
+            {experienceData.desc}
           </p>
         </motion.div>
 
@@ -36,7 +36,7 @@ export default function Experience() {
           <div className="absolute left-[28px] md:left-1/2 top-0 bottom-0 w-0.5 bg-white/5 md:-translate-x-1/2" />
 
           <div className="flex flex-col gap-12 md:gap-24">
-            {experienceData.map((item, index) => {
+            {experienceData.careers.map((item, index) => {
               const isEven = index % 2 === 0;
               return (
                 <div key={item.id} className={`relative flex items-center md:justify-between ${isEven ? 'md:flex-row' : 'md:flex-row-reverse'}`}>

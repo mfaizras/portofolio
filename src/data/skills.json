@@ -1,21 +1,5 @@
 [
   {
-    "id": "frontend",
-    "title": "Frontend Engineering",
-    "description": "Building immersive, performant, and accessible web interfaces using the modern ecosystem.",
-    "icon": "FrontendIcon",
-    "color": "text-blue-400",
-    "bgGradient": "from-blue-500/10 to-transparent",
-    "skills": [
-        { "name": "React", "level": "Expert", "icon": "GenericCodeIcon" },
-        { "name": "TypeScript", "level": "Expert", "icon": "GenericCodeIcon" },
-        { "name": "Tailwind CSS", "level": "Expert", "icon": "GenericCodeIcon" },
-        { "name": "Next.js", "level": "Advanced", "icon": "GenericCodeIcon" },
-        { "name": "Astro", "level": "Advanced", "icon": "GenericCodeIcon" },
-        { "name": "Framer Motion", "level": "Intermediate", "icon": "GenericCodeIcon" }
-    ]
-  },
-  {
     "id": "backend",
     "title": "Backend & Systems",
     "description": "Architecting robust server-side logic, APIs, and scalable microservices.",
@@ -23,42 +7,61 @@
     "color": "text-green-400",
     "bgGradient": "from-green-500/10 to-transparent",
     "skills": [
-        { "name": "Node.js", "level": "Expert", "icon": "https://nodejs.org/static/logos/jsIconGreen.svg" },
-        { "name": "Go", "level": "Intermediate", "icon": "GenericCodeIcon" },
-        { "name": "PostgreSQL", "level": "Advanced", "icon": "GenericCodeIcon" },
-        { "name": "Redis", "level": "Intermediate", "icon": "GenericCodeIcon" },
-        { "name": "GraphQL", "level": "Advanced", "icon": "GenericCodeIcon" },
-        { "name": "NestJS", "level": "Advanced", "icon": "GenericCodeIcon" },
-        { "name": "Laravel", "level": "Advanced", "icon": "https://upload.wikimedia.org/wikipedia/commons/9/9a/Laravel.svg" }
+      { "name": "PHP", "level": "Advanced", "icon": "https://upload.wikimedia.org/wikipedia/commons/2/27/PHP-logo.svg" },
+      { "name": "Laravel", "level": "Advanced", "icon": "https://upload.wikimedia.org/wikipedia/commons/9/9a/Laravel.svg" },
+      { "name": "CodeIgniter", "level": "Intermediate", "icon": "https://icon.icepanel.io/Technology/svg/CodeIgniter.svg" },
+      { "name": "Go", "level": "Intermediate", "icon": "https://go.dev/blog/go-brand/Go-Logo/SVG/Go-Logo_Aqua.svg" },
+      { "name": "Python", "level": "Intermediate", "icon": "https://www.svgrepo.com/show/452091/python.svg" },
+      { "name": "Node.js", "level": "Intermediate", "icon": "https://nodejs.org/static/logos/jsIconGreen.svg" },
+      { "name": "MySQL", "level": "Advanced", "icon": "https://www.svgrepo.com/show/303251/mysql-logo.svg" },
+      { "name": "PostgreSQL", "level": "Intermediate", "icon": "https://www.svgrepo.com/show/303301/postgresql-logo.svg" },
+      { "name": "Redis", "level": "Intermediate", "icon": "https://www.svgrepo.com/show/303460/redis-logo.svg" }
     ]
   },
   {
-    "id": "devops",
-    "title": "DevOps & Cloud",
-    "description": "Ensuring reliability and velocity with automated pipelines and cloud infrastructure.",
+    "id": "frontend",
+    "title": "Frontend",
+    "description": "Building immersive, performant, and accessible web interfaces using the modern ecosystem.",
+    "icon": "FrontendIcon",
+    "color": "text-blue-400",
+    "bgGradient": "from-blue-500/10 to-transparent",
+    "skills": [
+        { "name": "React", "level": "Expert", "icon": "https://www.svgrepo.com/show/452092/react.svg" },
+        { "name": "TypeScript", "level": "Expert", "icon": "https://www.svgrepo.com/show/374146/typescript-official.svg" },
+        { "name": "Tailwind CSS", "level": "Expert", "icon": "https://www.svgrepo.com/show/374118/tailwind.svg" },
+        { "name": "Astro", "level": "Advanced", "icon": "https://www.svgrepo.com/show/373446/astro.svg" }
+    ]
+  },
+  {
+    "id": "system",
+    "title": "System & Cloud",
+    "description": "Ensuring reliability and velocity with system and cloud infrastructure.",
     "icon": "CloudIcon",
     "color": "text-orange-400",
     "bgGradient": "from-orange-500/10 to-transparent",
     "skills": [
-        { "name": "Docker", "level": "Advanced", "icon": "GenericCodeIcon" },
-        { "name": "Kubernetes", "level": "Intermediate", "icon": "GenericCodeIcon" },
-        { "name": "AWS", "level": "Advanced", "icon": "GenericCodeIcon" },
-        { "name": "CI/CD", "level": "Advanced", "icon": "GenericCodeIcon" },
-        { "name": "Terraform", "level": "Intermediate", "icon": "GenericCodeIcon" }
+        { "name": "C++", "level": "Intermediate", "icon": "https://www.svgrepo.com/show/452183/cpp.svg" },
+        { "name": "Docker", "level": "Advanced", "icon": "https://www.svgrepo.com/show/452192/docker.svg" },
+        { "name": "Linux", "level": "Intermediate", "icon": "https://www.svgrepo.com/show/448236/linux.svg" },
+        { "name": "Internet Of Things", "level": "Advanced", "icon": "https://www.svgrepo.com/show/450190/iot-connection.svg" },
+        { "name": "GitHub", "level": "Advanced", "icon": "https://www.svgrepo.com/show/512317/github-142.svg" },
+        { "name": "MQTT", "level": "Advanced", "icon": "https://raw.githubusercontent.com/mqtt/mqttorg-graphics/refs/heads/master/svg/mqtt-ver.svg" }
     ]
   },
   {
-    "id": "tools",
-    "title": "Workflow & Tools",
-    "description": "Optimizing developer experience and code quality with industry-standard tools.",
-    "icon": "ToolsIcon",
+    "id": "ml",
+    "title": "Machine Learning",
+    "description": "Building and deploying machine learning models for data analysis and prediction.",
+    "icon": "BrainIcon",
     "color": "text-purple-400",
     "bgGradient": "from-purple-500/10 to-transparent",
     "skills": [
-        { "name": "Git", "level": "Expert", "icon": "GenericCodeIcon" },
-        { "name": "Figma", "level": "Intermediate", "icon": "GenericCodeIcon" },
-        { "name": "Jest/Vitest", "level": "Advanced", "icon": "GenericCodeIcon" },
-        { "name": "Linux", "level": "Advanced", "icon": "GenericCodeIcon" }
+        { "name": "Python", "level": "Expert", "icon": "https://www.svgrepo.com/show/452091/python.svg" },
+        { "name": "TensorFlow", "level": "Intermediate", "icon": "https://www.svgrepo.com/show/354440/tensorflow.svg" },
+        { "name": "PyTorch", "level": "Advanced", "icon": "https://www.svgrepo.com/show/354240/pytorch.svg" },
+        { "name": "Scikit-learn", "level": "Advanced", "icon": "https://www.svgrepo.com/show/473778/scikitlearn.svg" },
+        { "name": "Gemini LLM", "level": "Advanced", "icon": "https://upload.wikimedia.org/wikipedia/commons/1/1d/Google_Gemini_icon_2025.svg" },
+        { "name": "Chroma DB", "level": "Advanced", "icon": "https://brandlogos.net/wp-content/uploads/2025/06/chroma-logo_brandlogos.net_1z1qk-512x339.png" }
     ]
   }
 ]

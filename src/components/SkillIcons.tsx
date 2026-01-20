@@ -1,4 +1,5 @@
 import React from 'react';
+import { Brain } from 'lucide-react';
 
 interface IconProps extends React.SVGProps<SVGSVGElement> {
   size?: string | number;
@@ -53,3 +54,4 @@ export const ToolsIcon = (props: IconProps) => (
 );
 
 export const GenericCodeIcon = (props: IconProps) => <SvgIcon {...props} path="M9.4 16.6L4.8 12l4.6-4.6L8 6l-6 6 6 6 1.4-1.4zm5.2 0l4.6-4.6-4.6-4.6L16 6l6 6-6 6-1.4-1.4z" />;
+export const BrainIcon = (props: IconProps) => <Brain {...props} />;

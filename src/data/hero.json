@@ -3,8 +3,13 @@
     "heroName" : "Muhammad Faiz Rashid",
     "heroDesc" : {
         "desc" : "I'm An",
-        "role" : ["Fullstack Developer","Web Developer","Competitive Programmer Player"]
+        "role" : ["Fullstack Developer","Web Developer","Competitive Programmer","Student"]
     },
-    "aboutDesc" : "",
-    "cvLink" : ""
+    "aboutDesc" : "Final-year Informatics Student (GPA 3.92) with strong analytical skills proved by multiple Competitive Programming awards. Experienced in Fullstack Development with a keen interest in Backend Systems, API Development, and Cloud Architecture. Proficient in Python, PHP, and Javascript, with a strong willingness to adapt to new technologies.",
+    "cvLink" : "",
+    "email" : "contact@faizrash.id",
+    "location" : "Jakarta, Indonesia",
+    "footerName" : "Faiz Rashid",
+    "contactDesc" : "Have a project in mind or just want to chat? I'm always open to discussing new opportunities and ideas.",
+    "getInTouchText" : "I'm currently available for freelance projects and full-time opportunities. If you have a question or just want to say hi, I'll try my best to get back to you!"
 }

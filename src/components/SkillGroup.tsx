@@ -1,14 +1,14 @@
 import { motion } from 'motion/react';
 import { 
   FrontendIcon, BackendIcon, ToolsIcon, CloudIcon,
-  GenericCodeIcon,  SvgIcon
+  GenericCodeIcon,  SvgIcon, BrainIcon
 } from './SkillIcons';
 import skillData from '../data/skills.json';
 
 // Map string keys from JSON to actual React components
 const iconMap: Record<string, React.FC<any>> = {
   FrontendIcon, BackendIcon, ToolsIcon, CloudIcon,
-  GenericCodeIcon, SvgIcon
+  GenericCodeIcon, SvgIcon, BrainIcon
 };
 
 const getIcon = (iconName: string) => {
@@ -43,7 +43,7 @@ export default function SkillGroup() {
            className="text-center mb-16"
         >
           <h2 className="text-3xl md:text-5xl font-bold text-heading mb-4">
-            Technical Arsenal
+            Skills
           </h2>
           <p className="mt-6 text-text text-lg max-w-2xl mx-auto">
             A comprehensive look at the technologies I use to bring ideas to life, categorized by domain.

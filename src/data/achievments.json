@@ -1,56 +1,111 @@
 [
   {
     "id": 1,
-    "title": "1st Place - National Hackathon",
-    "organization": "Tech Giants Association",
-    "date": "November 2024",
-    "description": "Led a team of 4 to build an AI-powered accessibility tool. Awarded 'Best Innovation' out of 500+ participants.",
-    "icon": "TrophyIcon",
+    "title": "Best Capstone Project",
+    "organization": "Asah By Dicoding",
+    "date": "November 2025",
+    "description": "Achieved Best Capstone Project at the Asah By Dicoding With Title AI Learning Insights.",
+    "icon": "AwardIcon",
     "color": "text-yellow-400"
   },
   {
+    "id": 1,
+    "title": "Honorable Mention 2025 International Collegiate Programming Contest (ICPC) Asia Jakarta Regional Contest",
+    "organization": "ICPC Foundation",
+    "date": "November 2025",
+    "description": "Achieved Honorable Mention at the 2025 International Collegiate Programming Contest (ICPC) Asia Jakarta Regional Contest, an international-level competition. Qualified after successfully passing the Indonesia National Contest (INC) 2025, competing against top teams from across the country.",
+    "icon": "AwardIcon",
+    "color": "text-blue-400"
+  },
+    {
+    "id": 4,
+    "title": "Finalist Senior Competitive Programming Contest COMPFEST 17",
+    "organization": "Universitas Indonesia",
+    "date": "September 2025",
+    "description": "Selected as a finalist in the Senior Competitive Programming Contest at COMPFEST 17, Universitas Indonesia. Qualified after passing the preliminary round and ranking among the Top 20 teams nationwide.",
+    "icon": "AwardIcon",
+    "color": "text-blue-400"
+  },  
+  {
+    "id": 4,
+    "title": "21st Place Indonesia National Contest 2025",
+    "organization": "Bina Nusantara University",
+    "date": "October 2025",
+    "description": "Qualified as a finalist in the Indonesia National Contest (INC) 2025, the national qualification round for the ICPC Asia Jakarta Regional Contest. Advanced to the international regional stage after competing against top university teams across Indonesia.",
+    "icon": "AwardIcon",
+    "color": "text-blue-400"
+  },  
+  {
+    "id": 3,
+    "title": "1st Runner Up HOLOGY 8.0 Competitive Programming",
+    "organization": "Universitas Brawijaya",
+    "date": "August 2025",
+    "description": "Secured 1st Runner-Up at HOLOGY 8.0, a national-level competitive programming competition. Demonstrated strong problem-solving, algorithmic thinking, and teamwork in a highly competitive environment.",
+    "icon": "TrophyIcon",
+    "color": "text-blue-400"
+  },
+  {
+    "id": 5,
+    "title": "2nd Place Technofair 12.0 Competitive Programming",
+    "organization": "BEM FIKTI Universitas Gunadarma",
+    "date": "July 2025",
+    "description": "Secured 2nd Place at Technofair 12.0, a university-level competitive programming competition. Showcased solid performance in data structures, algorithms, and logical reasoning in a highly competitive academic environment.",
+    "icon": "TrophyIcon",
+    "color": "text-blue-400"
+  },
+  {
+    "id": 5,
+    "title": "Speaker: Miniclass Competitive Programming",
+    "organization": "BEM FIKTI Universitas Gunadarma",
+    "date": "April 2025",
+    "description": "Delivered a insightful lecture on Competitive Programming including problem-solving strategies, algorithmic thinking, and practical coding tips.",
+    "icon": "MicIcon",
+    "color": "text-purple-400",
+    "link" : "https://www.linkedin.com/posts/faizrash_latepost-competitiveprogramming-activity-7369242265195585538-fqse?utm_source=social_share_send&utm_medium=member_desktop_web&rcm=ACoAADpmsEAB3GFWe_UvuoJbWPD_IdVlCSMxh1g"
+  },
+  {
+    "id": 5,
+    "title": "1st Place CodeFest 03 Competitive Programming",
+    "organization": "Gunadarma IO",
+    "date": "February 2025",
+    "description": "Won 1st Place at CodeFest 3.0, a university-level competitive programming competition organized by Gunadarma.io. Demonstrated strong algorithmic thinking and efficient problem-solving skills.",
+    "icon": "TrophyIcon",
+    "color": "text-blue-400"
+  },
+  {
     "id": 2,
-    "title": "AWS Certified Solutions Architect",
-    "organization": "Amazon Web Services",
-    "date": "August 2024",
-    "description": "Validated expertise in designing distributed systems on AWS. Achieved a score in the top 5% of test takers.",
+    "title": "Honorable Mention 2024 International Collegiate Programming Contest (ICPC) Asia Jakarta Regional Contest",
+    "organization": "ICPC Foundation",
+    "date": "December 2024",
+    "description": "Awarded Honorable Mention at the 2024 International Collegiate Programming Contest (ICPC) Asia Jakarta Regional Contest. Advanced to the regional stage after qualifying through the Indonesia National Contest (INC) 2024, representing one of the top competitive programming teams nationally.",
     "icon": "AwardIcon",
     "color": "text-blue-400"
   },
   {
-    "id": 3,
-    "title": "Guest Speaker: Future of Web Dev",
-    "organization": "DevCon 2024",
-    "date": "June 2024",
-    "description": "Delivered a keynote on 'The State of Frontend Architecture' to an audience of 2,000+ developers.",
-    "icon": "MicIcon",
-    "color": "text-purple-400"
+    "id": 4,
+    "title": "72nd Place Indonesia National Contest",
+    "organization": "Bina Nusantara University",
+    "date": "October 2024",
+    "description": "Successfully qualified in the Indonesia National Contest (INC) 2024, earning a spot at the ICPC Asia Jakarta Regional Contest. Ranked among the top teams nationwide and demonstrated strong performance in algorithmic problem solving and competitive programming.",
+    "icon": "AwardIcon",
+    "color": "text-blue-400"
   },
   {
     "id": 4,
-    "title": "Open Source Contributor of the Month",
-    "organization": "Astro Framework",
-    "date": "March 2024",
-    "description": "Recognized for significant contributions to the core routing engine and documentation improvements.",
-    "icon": "StarIcon",
-    "color": "text-green-400"
+    "title": "3rd Place  Internet of Things Competition, KOMPRES 15",
+    "organization": "Informatics Laboratory, Universitas Gunadarma",
+    "date": "May 2024",
+    "description": "Achieved 3rd Place in the Internet of Things competition at KOMPRES 15, a university-level creativity and software development contest organized by the Informatics Laboratory, Universitas Gunadarma. Built an innovative IoT-based solution combining hardware and software integration.",
+    "icon": "TrophyIcon",
+    "color": "text-blue-400"
   },
   {
-    "id": 5,
-    "title": "Best UI/UX Design Award",
-    "organization": "Dribbble Annual Showcase",
+    "id": 4,
+    "title": "2nd Place CodeFest 02 Competitive Programming",
+    "organization": "Gunadarma IO",
     "date": "January 2024",
-    "description": "Featured project 'Nexus Dashboard' won the community vote for best interface design in the Fintech category.",
-    "icon": "ZapIcon",
-    "color": "text-orange-400"
-  },
-  {
-    "id": 6,
-    "title": "Full Stack Certification",
-    "organization": "Meta",
-    "date": "December 2023",
-    "description": "Completed rigorous comprehensive training in React, Django, and Database management.",
-    "icon": "CodeIcon",
-    "color": "text-cyan-400"
+    "description": "Awarded 2nd Place at CodeF`est 02, a university-level competitive programming contest hosted by Gunadarma.io. Demonstrated consistent performance in solving complex algorithmic problems under time constraints.",
+    "icon": "AwardIcon",
+    "color": "text-blue-400"
   }
 ]
