@@ -1,0 +1,45 @@
+---
+import BlogLayout from "../../layouts/BlogLayout.astro";
+import { getCollection } from "astro:content";
+import { ArrowLeft } from "lucide-react";
+import FloatingNavbar from "../../components/FloatingNavbar";
+import BlogList from "../../components/BlogList";
+
+const posts = (await getCollection("blog")).sort(
+  (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
+);
+---
+
+<BlogLayout
+  title="Articles & Thoughts | Faiz Rashid"
+  description="Exploring the world of web development, design, and technology."
+>
+  <FloatingNavbar client:load />
+  <main class="min-h-screen bg-bg relative overflow-hidden pt-32 pb-20 px-4">
+    <div class="max-w-7xl mx-auto z-10 relative">
+      <div class="mb-8">
+        <a
+          href="/"
+          class="inline-flex items-center gap-2 text-secondary hover:text-primary transition-colors group"
+        >
+          <ArrowLeft
+            size={20}
+            className="group-hover:-translate-x-1 transition-transform"
+          />
+          Back to Home
+        </a>
+      </div>
+
+      <header class="mb-16 text-center">
+        <h1 class="text-4xl md:text-6xl font-bold text-heading mb-6">
+          Article & Thoughts
+        </h1>
+        <p class="text-text text-lg max-w-2xl mx-auto">
+          Exploring the world of web development, design, and technology.
+        </p>
+      </header>
+
+      <BlogList client:load posts={posts} />
+    </div>
+  </main>
+</BlogLayout>

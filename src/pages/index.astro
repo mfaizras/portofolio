@@ -13,7 +13,32 @@ import BlogSection from "../components/BlogSection.tsx";
 import Contact from "../components/Contact.tsx";
 import FloatingNavbar from "../components/FloatingNavbar.tsx";
 import SplashScreen from "../components/SplashScreen.tsx";
+import { getCollection, type CollectionEntry } from "astro:content";
 
+const allPosts = await getCollection("blog");
+const recentPosts = allPosts
+  .sort(
+    (a: CollectionEntry<"blog">, b: CollectionEntry<"blog">) =>
+      b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
+  )
+  .slice(0, 3);
+
+const formattedPosts = recentPosts.map((post: CollectionEntry<"blog">) => ({
+  title: post.data.title,
+  excerpt: post.data.description,
+  date: post.data.pubDate.toLocaleDateString("en-us", {
+    month: "short",
+    day: "numeric",
+    year: "numeric",
+  }),
+  readTime: "5 min read", // Placeholder
+  tags: post.data.tags || [],
+  slug: post.slug,
+  image:
+    typeof post.data.heroImage === "object"
+      ? post.data.heroImage.src
+      : post.data.heroImage,
+}));
 // Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
 // Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
 ---
@@ -28,6 +53,6 @@ import SplashScreen from "../components/SplashScreen.tsx";
   <VerticalProject client:visible />
   <Achievements client:visible />
   <Education client:visible />
-  <BlogSection client:visible />
+  <BlogSection client:visible posts={formattedPosts} />
   <Contact client:visible />
 </Layout>
