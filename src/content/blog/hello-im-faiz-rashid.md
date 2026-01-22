@@ -3,7 +3,7 @@ title: "Hello..."
 description: "Get to know me better with this blog post."
 pubDate: "Jan 20 2026"
 heroImage: "../../assets/blog-placeholder.png"
-tags: ["Frontend", "React", "Web"]
+tags: ["Introduction"]
 ---
 
 ## 👋 Hi, I’m Faiz Rashid
