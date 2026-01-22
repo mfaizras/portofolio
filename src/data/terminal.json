@@ -1,0 +1,20 @@
+{
+    "help": [
+        "\u001b[1;36mCommands:\u001b[0m",
+        "\u001b[90m  about  - About me\u001b[0m",
+        "\u001b[90m  skills - My skills\u001b[0m",
+        "\u001b[90m  help   - Show this help message\u001b[0m"
+    ],
+    "about": [
+        "\u001b[1;36mAbout me:\u001b[0m",
+        "\u001b[90m  I'm a software engineer with experience in web development.\u001b[0m",
+        "\u001b[90m  I'm passionate about building cool stuff.\u001b[0m"
+    ],
+    "skills": [
+        "\u001b[1;36mSkills:\u001b[0m",
+        "\u001b[90m  Laravel\u001b[0m",
+        "\u001b[90m  React\u001b[0m",
+        "\u001b[90m  Python\u001b[0m",
+        "\u001b[90m  Javascript\u001b[0m"
+    ]
+}

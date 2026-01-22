@@ -3,6 +3,7 @@ import { useEffect, useRef } from "react";
 import { Terminal } from "xterm";
 import { FitAddon } from "xterm-addon-fit";
 import "xterm/css/xterm.css";
+import terminalData from "../data/terminal.json";
 
 export default function TerminalComponent() {
   const containerRef = useRef(null);
@@ -44,6 +45,7 @@ export default function TerminalComponent() {
     term.prompt();
 
     let command = "";
+    let terminalMap = new Map(Object.entries(terminalData));
     term.onKey(({ key, domEvent }) => {
       const printable =
         !domEvent.altKey &&
@@ -53,14 +55,12 @@ export default function TerminalComponent() {
        if (domEvent.keyCode === 13) {
             term.write("\r\n");
 
-            if (command === "help") {
-            term.writeln("\x1b[1;36mCommands:\x1b[0m");
-            term.writeln("\x1b[90m  about  - About me\x1b[0m");
-            term.writeln("\x1b[90m  skills - My skills\x1b[0m");
-            } else if (command === "about") {
-            term.writeln("Muhammad Faiz Rashid — Software Engineer");
+            if (terminalMap.has(command)) {
+              terminalMap.get(command)?.forEach((line) => {
+                term.writeln(line);
+              });
             } else {
-            term.writeln(`Command not found: ${command}`);
+              term.writeln(`Command not found: ${command}`);
             }
 
             command = "";
