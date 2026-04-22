@@ -51,14 +51,14 @@ The hardware is built around a **NodeMCU V1.0** microcontroller paired with an *
 
 
 <p style="text-align:center;">
-  <img src="/src/assets/blog/we-actually-won-iot-competition/state-architecture.png"  style="margin-left:auto; margin-right:auto;"/>
+  <img src="/assets/blog/we-actually-won-iot-competition/state-architecture.png"  style="margin-left:auto; margin-right:auto;"/>
 </p>
 
 ### The Borrowing State Machine
 
 When a **student card** is scanned, the device enters `BorrowState`. Every **book tag** detected in this state is pushed into an in-memory vector. When the **same student card** is scanned again, the accumulated book UIDs are sent to the backend in one batch recording the full borrowing transaction at once.
 
-<img src="/src/assets/blog/we-actually-won-iot-competition/borrow-state-flow.png" style="margin-left:auto; margin-right:auto;"/>
+<img src="/assets/blog/we-actually-won-iot-competition/borrow-state-flow.png" style="margin-left:auto; margin-right:auto;"/>
 
 ### Registering New Books
 
@@ -69,7 +69,7 @@ We had a classic IoT communication challenge: how the frontend would receive rea
 
 We designed what we called a **Container Endpoint** — a small, self-flushing buffer living in the database.
 
-<img src="/src/assets/blog/we-actually-won-iot-competition/container-system.png" style="margin-left:auto; margin-right:auto;"/>
+<img src="/assets/blog/we-actually-won-iot-competition/container-system.png" style="margin-left:auto; margin-right:auto;"/>
 
 We created a specific backend endpoint (`/container_card`). 
 * When the IoT device makes a `POST` request, it temporarily saves the scanned UID into the database.
@@ -94,7 +94,7 @@ Looking at my teammates, I knew I couldn't let them down. I chose the latter. I 
 
 The sleepless nights and intense debugging sessions paid off. Our Smart Library System was fully functional, successfully hitting our three main goals: increasing management efficiency, improving data security, and elevating library services.
 
-<img src="/src/assets/blog/we-actually-won-iot-competition/winner.jpg" style="margin-left:auto; margin-right:auto;"/>
+<img src="/assets/blog/we-actually-won-iot-competition/winner.jpg" style="margin-left:auto; margin-right:auto;"/>
 
 Presenting the final product to the judges was an incredible experience, and standing on that stage to accept the **3rd Place** award for the IoT category was the perfect conclusion to our KOMPRES 15 journey!
 
