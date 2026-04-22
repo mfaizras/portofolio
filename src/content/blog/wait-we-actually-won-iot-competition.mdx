@@ -1,0 +1,116 @@
+---
+title: "Wait… We Actually Won an IoT Competition?"
+description: "How four college students with zero IoT experience walked into KOMPRES 15 and walked out with a fully working RFID-powered library system."
+pubDate: "May 30 2024"
+heroImage: "../../assets/blog/we-actually-won-iot-competition/header.jpg"
+tags: ["Competition","IoT"]
+---
+
+## It Started With a Competition
+
+The **Laboratorium Teknik Informatika Gunadarma** hosts an competition called [**KOMPRES 15**](https://iflab.gunadarma.ac.id/kompres) a showcase of three disciplines: Machine Learning, IoT, and Live Coding (competitive programming-style). When KOMPRES 15 opened its doors, I saw it as a rare chance for real growth.
+
+I signed up for **Live Coding** solo. But then three friends Arya, Dimas, and Nabila floated the idea of forming a team for one of the other tracks. We formed our squad, **'Tim Pengagum Rahasia'** but quickly hit a massive roadblock: we realized we only had exactly one week left before the deadline right after we registered! With the clock ticking, we had to choose between Machine Learning and IoT.
+
+> *None of us had seriously studied Machine Learning. But IoT? I had built an RFID door lock back in vocational high school. That memory was the spark.*
+
+That single vocational high school memory was enough to tip the scales. We chose **IoT**.
+
+## The Brainstorming Phase
+I remembered a project from my vocational high school days where I built an RFID-based door lock. I pitched the idea to the team: *What if we built an IoT-based tracking device?* Initially, we thought about tracking inventory in a warehouse. But looking around our own campus environment, a more pressing issue stood out: the university library. We noticed that traditional library management is often inefficient and time-consuming. Furthermore, cases of lost or misplaced books are a frustrating reality for many libraries. 
+
+That was our lightbulb moment. We decided to build a **Smart Library System** integrated with IoT to improve operational efficiency and the quality of service for both librarians and students.  
+
+## The Team & How We Split the Work
+
+Four people, four roles — clean and decisive from day one.
+
+| Name | Role | 
+|------|------|
+| Muhammad Faiz Rashid | IoT Engineer · System Architect |
+| Arya Ulya Krisna | Frontend Developer |
+| Dimas Febriyanto | Backend Developer | 
+| Nabila Alawiyah | Project Manager · Documentation | 
+
+I handled the **IoT device** and designed the data-exchange protocol between the hardware and the web server. Arya owned the frontend. Dimas built the backend. And Nabila our self-described *Hustler* kept the whole project organized, documented, and on track.
+
+
+## The Problem We Set Out to Solve
+
+Library management in many Indonesian institutions is still painfully manual. Date-due cards stamped by hand, borrowing records tracked on paper, no real-time visibility into what's on the shelf. The consequences are real:
+
+- **Slow, inefficient processes** — librarians spend excessive time on routine check-in and check-out tasks
+- **Books going missing** — thousands of books have been lost from Indonesian libraries, unreturned, stolen, or damaged
+
+We were surrounded by the very problem we could solve. The idea crystallized fast: a **Sistem Perpustakaan Cerdas** (Smart Library System) powered by IoT.
+
+
+## How the IoT Device Works
+
+The hardware is built around a **NodeMCU V1.0** microcontroller paired with an **RFID-RC522** reader. Every book and every student card carries an RFID tag. The device's job sounds simple scan tags and talk to the server, but the state machine underneath is where the real logic lives.
+
+
+<p style="text-align:center;">
+  <img src="/src/assets/blog/we-actually-won-iot-competition/state-architecture.png"  style="margin-left:auto; margin-right:auto;"/>
+</p>
+
+### The Borrowing State Machine
+
+When a **student card** is scanned, the device enters `BorrowState`. Every **book tag** detected in this state is pushed into an in-memory vector. When the **same student card** is scanned again, the accumulated book UIDs are sent to the backend in one batch recording the full borrowing transaction at once.
+
+<img src="/src/assets/blog/we-actually-won-iot-competition/borrow-state-flow.png" style="margin-left:auto; margin-right:auto;"/>
+
+### Registering New Books
+
+A physical **button** on the device triggers `AdminState`. Every tag scanned in this mode is forwarded directly to the frontend for registering new books or student cards into the system.
+
+### The Container Hack: Long Polling Over WebSockets
+We had a classic IoT communication challenge: how the frontend would receive real-time UID scans from the device during the Admin State?  Ideally, you would use WebSockets for this. However, to keep things lightweight and fast to implement we needed a creative solution.
+
+We designed what we called a **Container Endpoint** — a small, self-flushing buffer living in the database.
+
+<img src="/src/assets/blog/we-actually-won-iot-competition/container-system.png" style="margin-left:auto; margin-right:auto;"/>
+
+We created a specific backend endpoint (`/container_card`). 
+* When the IoT device makes a `POST` request, it temporarily saves the scanned UID into the database.
+* When the frontend makes a `GET` request, the database returns the UID and *immediately deletes it* from the table. This means subsequent `GET` requests will return empty until a new card is scanned.
+
+By having our frontend perform **long polling** on this endpoint, we successfully simulated a real-time data feed without the overhead of maintaining WebSocket connections.
+
+## The Final Day
+
+The finals for Live Coding and IoT were scheduled for the same day. My initial plan was ambitious but calculated: finish the **Live Coding** session first, then immediately sprint to the next room for the **IoT presentation**.
+
+However, minutes before the Live Coding final started, disaster struck. Our IoT device—the heart of our Smart Library System—ran into a critical error. I was suddenly faced with a high-stakes choice:
+
+1.  **Proceed with the Live Coding final** and chase the solo trophy, leaving my team to struggle with a broken device.
+2.  **Forfeit my chance in Live Coding** to spend those crucial hours debugging the IoT hardware so my team could actually present.
+
+Looking at my teammates, I knew I couldn't let them down. I chose the latter. I decided **not to continue the Live Coding final** and spent the entire time hunched over my laptop and the NodeMCU, debugging the system until the very last second.
+
+> *It was a tough call to give up a solo final I had worked hard for, but in engineering, your priority is to make sure the system works when it matters most.*
+
+## The Result
+
+The sleepless nights and intense debugging sessions paid off. Our Smart Library System was fully functional, successfully hitting our three main goals: increasing management efficiency, improving data security, and elevating library services.
+
+<img src="/src/assets/blog/we-actually-won-iot-competition/winner.jpg" style="margin-left:auto; margin-right:auto;"/>
+
+Presenting the final product to the judges was an incredible experience, and standing on that stage to accept the **3rd Place** award for the IoT category was the perfect conclusion to our KOMPRES 15 journey!
+
+
+## If You’re Curious
+
+We open-sourced everything under the **Class-IA21** GitHub organization.
+
+- 🔧 [IoT Device](https://github.com/Class-IA21/smart-library-device)
+- ⚙️ [Backend](https://github.com/Class-IA21/smart-library-be)
+- 🖥️ [Frontend](https://github.com/Class-IA21/smart-library-fe)
+
+## What We Took Away
+
+Going into KOMPRES 15, none of us were IoT specialists. We had a dusty memory of an RFID door lock from vocational school, a strong sense of what problems looked like in our daily environment, and four people willing to commit fully to a shared idea.
+
+The most valuable lesson wasn't technical it was the discipline of **narrowing the problem first** and letting the solution follow. We didn't build a smart library because it sounded impressive. We built it because we knew exactly what pain point it solved, and we had a clear plan to validate it in hardware on a tight deadline.
+
+If you're a student debating whether to join a competition: **just go**. The constraint of a deadline and a judging panel accelerates learning in ways no classroom can replicate.  

@@ -1,7 +1,7 @@
 ---
 title: "Hello..."
 description: "Get to know me better with this blog post."
-pubDate: "Jan 20 2026"
+pubDate: "Jan 20 2023"
 heroImage: "../../assets/blog-placeholder.png"
 tags: ["Introduction"]
 ---
