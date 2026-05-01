@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { Github, ExternalLink, Code2, Layers, Cpu } from 'lucide-react';
+import { Github, ExternalLink, Code2, Layers, Cpu, BookOpen } from 'lucide-react';
 import projects from '../data/projects.json'
 
 
@@ -109,6 +109,19 @@ export default function ProjectTabs() {
                     <span className="text-sm font-medium">Code</span>
                   </motion.a>
                   )}
+
+                  {activeTab.links.blog && (
+                  <motion.a 
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                    href={activeTab.links.blog} 
+                    className="flex items-center gap-2 px-4 py-2 rounded-full bg-black/50 backdrop-blur-md text-white hover:bg-primary transition-colors border border-white/10"
+                  >
+                    <BookOpen size={18} />
+                    <span className="text-sm font-medium">Blog</span>
+                  </motion.a>
+                  )}
+
                   {activeTab.links.demo && (
                   <motion.a 
                     whileHover={{ scale: 1.05 }}

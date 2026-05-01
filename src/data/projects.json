@@ -1,5 +1,14 @@
 [
   {
+    "id": 6,
+    "title": "ListrikKita",
+    "description": "Led a full codebase refactoring from legacy PHP to Laravel, modernizing the architecture of a large-scale eCommerce platform specializing in electrical equipment and supplies. The platform manages a catalog of 16,000+ products and serves two distinct customer segments — a B2B ordering flow with negotiable discount capabilities for wholesale buyers, and a streamlined regular checkout for retail customers, both connected to a payment gateway for end-to-end transactions. \nTo ensure maintainability and scalability, the codebase was restructured following SOLID principles with clear dependency separation across service layers, repositories, and controllers. Redis Caching was integrated to handle the heavy product catalog load, significantly improving response times and overall platform stability. Laravel's event and listener system was adopted across multiple modules — including email notification dispatch, product viewer tracking, settings change propagation, database record insertion, and order placement workflows — effectively decoupling side-effect logic from the main request cycle and keeping web traffic lean and responsive.",
+    "techStack": ["Laravel", "MySQL", "Redis"],
+    "links": { "demo": "https://listrikkita.com/" },
+    "icon": "Code2Icon",
+    "image": "/assets/projects/listrikkita.png"
+  },
+  {
     "id": 1,
     "title": "Inizio woman",
     "description": "Inizio Woman is a women's fashion catalog website that I developed from an initial static version based on Google Drive into a fully dynamic web platform with an integrated admin panel. The system allows administrators to manage products, categories, images, and product details through a backend interface, enabling real-time content updates without manual file changes. On the user side, the website provides a clean and responsive interface for browsing apparel collections, viewing detailed product information, and exploring variations in color and size. This transformation significantly improved content management efficiency, scalability, and overall user experience.",
@@ -49,7 +58,7 @@
     "title": "Gunadarma Telegram Chatbot ",
     "description": "Developed a Telegram-based information chatbot for Gunadarma University using Python, Retrieval-Augmented Generation (RAG) pipeline and Gemini LLM to generate accurate and context-aware responses. Implemented natural-language query handling, document retrieval, and LLM-based answer generation as part of the University of Gunadarma Scientific Writing Project. ",
     "techStack": ["Python", "Gemini LLM", "Chroma Vector DB","RAG Architecturee"],
-    "links": { "demo": "https://web.telegram.org/k/#@infogundar_bot" },
+    "links": { "demo": "https://web.telegram.org/k/#@infogundar_bot", "github" : "https://github.com/mfaizras/gunadarma-telegram-chatbot", "blog" : "https://library.gunadarma.ac.id/repository/pengembangan-chatbot-informasi-universitas-gunadarma-berbasis-telegram-menggunakan-arsitektur-retrieval-augmented-generation-dengan-model-bahasa-besar-gemini-ssm"},
     "icon": "Code2",
     "image": "/assets/projects/ug-telebot.png"
   },

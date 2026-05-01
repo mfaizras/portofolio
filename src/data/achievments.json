@@ -97,7 +97,8 @@
     "date": "May 2024",
     "description": "Achieved 3rd Place in the Internet of Things competition at KOMPRES 15, a university-level creativity and software development contest organized by the Informatics Laboratory, Universitas Gunadarma. Built an innovative IoT-based solution combining hardware and software integration.",
     "icon": "TrophyIcon",
-    "color": "text-blue-400"
+    "color": "text-blue-400",
+    "link": "https://faizrash.id/blog/wait-we-actually-won-iot-competition/"
   },
   {
     "id": 4,
