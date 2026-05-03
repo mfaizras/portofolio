@@ -1,6 +1,7 @@
 ---
 title: "Customate — AI-Powered Omnichannel Customer Service Platform"
 description: "full-stack omnichannel customer service platform that consolidates incoming messages from multiple messaging channels into a single, unified dashboard."
+order: 2
 categories: ["web", "ai"]
 techStack:
   - label: "Python"

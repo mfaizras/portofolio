@@ -2,7 +2,7 @@
 title: "Inizio Woman"
 description: "Turned a static fashion catalog into a dynamic storefront with a full admin CMS."
 categories: ["web"]
-order: 2
+order: 1
 techStack:
   - label: "Laravel"
     icon: "https://upload.wikimedia.org/wikipedia/commons/9/9a/Laravel.svg"
