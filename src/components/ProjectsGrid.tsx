@@ -285,7 +285,6 @@ export default function ProjectsGrid({
             <a
               key={project.id}
               href={primaryLink}
-              target="_blank"
               rel="noreferrer"
               className="block h-full"
             >
