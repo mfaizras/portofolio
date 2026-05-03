@@ -28,14 +28,14 @@
   color: var(--text);
   font-family: 'DM Sans', sans-serif;
   font-weight: 300;
-  padding: 60px 24px;
+  padding: 80px 16px;
   overflow-x: hidden;
   width: 100%;
 }
 
 /* ─── Section Header ─── */
 .section-header {
-  max-width: 960px;
+  max-width: 1280px;
   margin: 0 auto 64px;
   display: flex;
   align-items: flex-end;
@@ -81,7 +81,7 @@
 
 /* ─── Layout ─── */
 .achievements-wrapper {
-  max-width: 960px;
+  max-width: 1280px;
   margin: 0 auto;
   display: flex;
   flex-direction: column;

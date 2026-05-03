@@ -1,0 +1,362 @@
+---
+import { type CollectionEntry, getCollection } from "astro:content";
+import BlogLayout from "../../layouts/BlogLayout.astro";
+import FloatingNavbar from "../../components/FloatingNavbar";
+import { ArrowLeft, ExternalLink, Github } from "lucide-react";
+import skillsData from "../../data/skills.json";
+
+export async function getStaticPaths() {
+  const projects = await getCollection("projects");
+  return projects.map((project) => ({
+    params: { slug: project.slug },
+    props: project,
+  }));
+}
+
+type Props = CollectionEntry<"projects">;
+
+const project = Astro.props as Props;
+const { Content } = await project.render();
+
+const heroImage = project.data.heroImage;
+const gallery = project.data.gallery ?? [];
+const galleryImages = gallery.filter((image) => image);
+
+type SkillCategory = {
+  skills: { name: string; icon?: string }[];
+};
+
+type TechItem = {
+  label: string;
+  icon?: string;
+};
+
+const techIconMap = new Map<string, string>();
+(skillsData as SkillCategory[]).forEach((category) => {
+  category.skills.forEach((skill) => {
+    if (skill.icon) {
+      techIconMap.set(skill.name, skill.icon);
+    }
+  });
+});
+
+const normalizeTechItem = (item: string | TechItem): TechItem => {
+  if (typeof item === "string") {
+    return { label: item, icon: techIconMap.get(item) };
+  }
+
+  return { label: item.label, icon: item.icon ?? techIconMap.get(item.label) };
+};
+---
+
+<BlogLayout
+  title={`${project.data.title} | Projects`}
+  description={project.data.description}
+  image={heroImage}
+  type="article"
+>
+  <FloatingNavbar client:load />
+
+  <article class="bg-bg min-h-screen pt-28 pb-20">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-10">
+      <a
+        href="/projects"
+        class="inline-flex items-center gap-2 text-secondary hover:text-primary transition-colors mb-8 group pl-1"
+      >
+        <ArrowLeft
+          size={20}
+          class="group-hover:-translate-x-1 transition-transform"
+        />
+        Back to Projects
+      </a>
+
+      <div class="mb-10">
+        <h1 class="text-3xl md:text-5xl font-bold text-heading mb-4 leading-tight">
+          {project.data.title}
+        </h1>
+        <p class="text-text text-lg leading-relaxed max-w-2xl">
+          {project.data.description}
+        </p>
+      </div>
+
+      <div class="flex flex-wrap items-center gap-3 mb-10">
+        {project.data.techStack.map((tech) => {
+          const { label, icon } = normalizeTechItem(tech);
+
+          return (
+            <span
+              key={label}
+              class="inline-flex items-center gap-2 px-3 py-1 text-xs uppercase tracking-wider font-semibold bg-bgSecondary text-text rounded-full border border-white/10"
+            >
+              {icon && (
+                <img
+                  src={icon}
+                  alt={label}
+                  loading="lazy"
+                  class="h-4 w-auto max-w-[16px] shrink-0 object-contain"
+                />
+              )}
+              {label}
+            </span>
+          );
+        })}
+      </div>
+
+      <div class="flex flex-wrap items-center gap-4 mb-12">
+        {project.data.demo && (
+          <a
+            href={project.data.demo}
+            class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary text-bg font-semibold hover:bg-tertiary transition-colors"
+          >
+            <ExternalLink size={16} /> Live Demo
+          </a>
+        )}
+        {project.data.github && (
+          <a
+            href={project.data.github}
+            class="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-primary/40 text-primary hover:text-heading hover:border-primary transition-colors"
+          >
+            <Github size={16} /> GitHub
+          </a>
+        )}
+      </div>
+
+      {heroImage && (
+        <div class="rounded-2xl overflow-hidden shadow-2xl border border-white/10 mb-12 aspect-video relative">
+          <img
+            src={heroImage}
+            alt={project.data.title}
+            loading="lazy"
+            class="w-full h-full object-cover"
+          />
+          <div class="absolute inset-0 bg-gradient-to-t from-bg via-transparent to-transparent opacity-30" />
+        </div>
+      )}
+
+      {galleryImages.length > 0 && (
+        <section class="mb-12">
+          <div class="flex items-center justify-between gap-3 mb-4">
+            <h2 class="text-2xl font-semibold text-heading">Gallery</h2>
+            <div class="hidden sm:flex items-center gap-2">
+              <button
+                type="button"
+                class="inline-flex h-9 w-9 items-center justify-center rounded-full border border-white/10 text-heading hover:border-primary/60 transition-colors"
+                aria-label="Scroll gallery left"
+                data-gallery-prev
+              >
+                &larr;
+              </button>
+              <button
+                type="button"
+                class="inline-flex h-9 w-9 items-center justify-center rounded-full border border-white/10 text-heading hover:border-primary/60 transition-colors"
+                aria-label="Scroll gallery right"
+                data-gallery-next
+              >
+                &rarr;
+              </button>
+            </div>
+          </div>
+          <div
+            class="gallery-slider flex gap-4 overflow-x-auto pb-2 pr-2 snap-x snap-mandatory scroll-smooth"
+            data-gallery-slider
+          >
+            {galleryImages.map((image) => (
+              <button
+                type="button"
+                class="group w-[220px] sm:w-[260px] md:w-[300px] shrink-0 snap-start rounded-2xl overflow-hidden border border-white/10 bg-bgSecondary focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/60"
+                data-gallery-src={image}
+                aria-label={`Open ${project.data.title} gallery image`}
+              >
+                <img
+                  src={image}
+                  alt={`${project.data.title} gallery image`}
+                  loading="lazy"
+                  class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-[1.02]"
+                />
+              </button>
+            ))}
+          </div>
+        </section>
+      )}
+
+      <dialog
+        id="project-gallery-dialog"
+        class="project-gallery-dialog backdrop:bg-black/70 bg-transparent p-4 max-w-none w-screen h-screen fixed inset-0 flex items-center justify-center opacity-0 pointer-events-none"
+      >
+        <div class="project-gallery-panel relative bg-bgSecondary/90 border border-white/10 rounded-2xl overflow-hidden shadow-2xl w-full max-w-5xl">
+          <button
+            type="button"
+            class="absolute top-3 right-3 z-10 inline-flex items-center justify-center h-9 w-9 rounded-full bg-bg/80 text-heading border border-white/10 hover:border-primary/60 transition-colors"
+            data-gallery-close
+            aria-label="Close image"
+          >
+            &times;
+          </button>
+           <button
+             type="button"
+             class="absolute left-3 top-1/2 z-10 hidden h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full bg-bg/80 text-heading border border-white/10 hover:border-primary/60 transition-colors sm:inline-flex"
+             data-gallery-prev
+             aria-label="Previous image"
+           >
+             &larr;
+           </button>
+           <button
+             type="button"
+             class="absolute right-3 top-1/2 z-10 hidden h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full bg-bg/80 text-heading border border-white/10 hover:border-primary/60 transition-colors sm:inline-flex"
+             data-gallery-next
+             aria-label="Next image"
+           >
+             &rarr;
+           </button>
+          <img
+            id="project-gallery-image"
+            src=""
+            alt="Project gallery preview"
+            class="block w-full max-h-[80vh] md:max-h-[85vh] object-contain bg-bg"
+          />
+        </div>
+      </dialog>
+
+      <style>
+        .project-gallery-dialog {
+          transition: opacity 180ms ease;
+        }
+        .project-gallery-dialog[data-state="open"] {
+          opacity: 1;
+          pointer-events: auto;
+        }
+        .project-gallery-panel {
+          transform: translateY(12px) scale(0.98);
+          opacity: 0;
+          transition: transform 220ms ease, opacity 220ms ease;
+        }
+        .project-gallery-dialog[data-state="open"] .project-gallery-panel {
+          transform: translateY(0) scale(1);
+          opacity: 1;
+        }
+        .gallery-slider {
+          scrollbar-width: none;
+        }
+        .gallery-slider::-webkit-scrollbar {
+          display: none;
+        }
+      </style>
+
+      <div
+        class="prose prose-invert prose-lg max-w-none prose-headings:text-heading prose-a:text-primary prose-a:no-underline hover:prose-a:underline prose-img:rounded-xl prose-pre:bg-bgSecondary prose-pre:border prose-pre:border-white/10 text-justify"
+      >
+        <Content />
+      </div>
+    </div>
+  </article>
+</BlogLayout>
+
+<script>
+  const dialog = document.querySelector('#project-gallery-dialog');
+  const dialogImage = document.querySelector('#project-gallery-image');
+  const openButtons = Array.from(document.querySelectorAll('[data-gallery-src]'));
+  const closeButton = document.querySelector('[data-gallery-close]');
+  const dialogPanel = document.querySelector('.project-gallery-panel');
+  const slider = document.querySelector('[data-gallery-slider]');
+  const sliderPrev = document.querySelector('[data-gallery-prev]');
+  const sliderNext = document.querySelector('[data-gallery-next]');
+  const dialogPrev = document.querySelector('#project-gallery-dialog [data-gallery-prev]');
+  const dialogNext = document.querySelector('#project-gallery-dialog [data-gallery-next]');
+  let activeIndex = 0;
+
+  const closeDialog = () => {
+    if (!dialog) return;
+    dialog.dataset.state = 'closing';
+    setTimeout(() => {
+      dialog.close();
+      dialog.dataset.state = '';
+    }, 180);
+  };
+
+  if (dialog && dialogImage && dialogPanel) {
+    openButtons.forEach((button) => {
+      button.addEventListener('click', () => {
+        const src = button.getAttribute('data-gallery-src');
+        if (!src) return;
+        activeIndex = openButtons.indexOf(button);
+        dialogImage.src = src;
+        if (!dialog.open) dialog.showModal();
+        dialog.dataset.state = 'open';
+      });
+    });
+
+    closeButton?.addEventListener('click', () => closeDialog());
+
+    dialog.addEventListener('cancel', (event) => {
+      event.preventDefault();
+      closeDialog();
+    });
+
+    dialog.addEventListener('click', (event) => {
+      if (event.target === dialog) {
+        closeDialog();
+      }
+    });
+
+    dialog.addEventListener('close', () => {
+      dialogImage.src = '';
+    });
+
+    const showImageAt = (index) => {
+      const normalizedIndex = (index + openButtons.length) % openButtons.length;
+      const button = openButtons[normalizedIndex];
+      const src = button?.getAttribute('data-gallery-src');
+      if (!src) return;
+      activeIndex = normalizedIndex;
+      dialogImage.src = src;
+    };
+
+    dialogPrev?.addEventListener('click', () => {
+      showImageAt(activeIndex - 1);
+    });
+
+    dialogNext?.addEventListener('click', () => {
+      showImageAt(activeIndex + 1);
+    });
+
+    let touchStartY = 0;
+    let touchStartX = 0;
+
+    dialogPanel.addEventListener('touchstart', (event) => {
+      const touch = event.touches[0];
+      if (!touch) return;
+      touchStartY = touch.clientY;
+      touchStartX = touch.clientX;
+    }, { passive: true });
+
+    dialogPanel.addEventListener('touchend', (event) => {
+      const touch = event.changedTouches[0];
+      if (!touch) return;
+      const deltaY = touch.clientY - touchStartY;
+      const deltaX = touch.clientX - touchStartX;
+      if (deltaY > 70 && Math.abs(deltaY) > Math.abs(deltaX)) {
+        closeDialog();
+        return;
+      }
+      if (Math.abs(deltaX) > 80 && Math.abs(deltaX) > Math.abs(deltaY)) {
+        if (deltaX < 0) {
+          showImageAt(activeIndex + 1);
+        } else {
+          showImageAt(activeIndex - 1);
+        }
+      }
+    });
+  }
+
+  if (slider instanceof HTMLElement) {
+    const scrollByAmount = () => Math.min(340, slider.clientWidth * 0.8);
+
+    sliderPrev?.addEventListener('click', () => {
+      slider.scrollBy({ left: -scrollByAmount(), behavior: 'smooth' });
+    });
+
+    sliderNext?.addEventListener('click', () => {
+      slider.scrollBy({ left: scrollByAmount(), behavior: 'smooth' });
+    });
+  }
+</script>

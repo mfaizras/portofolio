@@ -20,7 +20,7 @@ const { Content } = await post.render();
 const heroImage =
   typeof post.data.heroImage === "object"
     ? post.data.heroImage.src
-    : post.data.heroImage || "/blog-placeholder.png";
+    : post.data.heroImage;
 ---
 
 <BlogLayout

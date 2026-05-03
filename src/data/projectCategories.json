@@ -1,0 +1,23 @@
+{
+  "web": {
+    "label": "Web App",
+    "badge": "bg-[#112a4d] text-[#a9c8ff] border border-[#20437a] shadow-[0_0_0_1px_rgba(32,67,122,0.35)]",
+    "thumb": "bg-[#14284f] bg-gradient-to-br from-[#173a77]/80 to-[#0f1f3a] border border-[#214680] shadow-[inset_0_0_0_1px_rgba(32,67,122,0.35)]",
+    "icon": "Monitor",
+    "iconColor": "text-[#a9c8ff]"
+  },
+  "api": {
+    "label": "API",
+    "badge": "bg-[#123321] text-[#9fe3b6] border border-[#1f5b38] shadow-[0_0_0_1px_rgba(31,91,56,0.35)]",
+    "thumb": "bg-[#132b1d] bg-gradient-to-br from-[#1c4a2f]/80 to-[#0f2016] border border-[#1f5b38] shadow-[inset_0_0_0_1px_rgba(31,91,56,0.35)]",
+    "icon": "Server",
+    "iconColor": "text-[#9fe3b6]"
+  },
+  "ai": {
+    "label": "AI / Bot",
+    "badge": "bg-[#2a2140] text-[#d6c1ff] border border-[#4c3f75] shadow-[0_0_0_1px_rgba(76,63,117,0.35)]",
+    "thumb": "bg-[#241c3a] bg-gradient-to-br from-[#3a2a5c]/80 to-[#1a1427] border border-[#4c3f75] shadow-[inset_0_0_0_1px_rgba(76,63,117,0.35)]",
+    "icon": "Bot",
+    "iconColor": "text-[#d6c1ff]"
+  }
+}

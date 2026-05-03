@@ -1,0 +1,114 @@
+<h2 class="sr-only" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0)">Contoh desain kolom project di web portofolio untuk software engineer</h2>
+
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:var(--font-sans)}
+.section{padding:2rem 0}
+.section-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:1.5rem}
+.section-title{font-size:18px;font-weight:500;color:var(--color-text-primary)}
+.filters{display:flex;gap:8px;flex-wrap:wrap}
+.chip{font-size:12px;padding:5px 12px;border-radius:20px;border:0.5px solid var(--color-border-secondary);background:transparent;color:var(--color-text-secondary);cursor:pointer;transition:all .15s}
+.chip.active{background:#EEEDFE;border-color:#AFA9EC;color:#3C3489}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:16px}
+.card{background:var(--color-background-primary);border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-lg);overflow:hidden;transition:border-color .15s;cursor:pointer}
+.card:hover{border-color:var(--color-border-primary)}
+.card-thumb{width:100%;height:120px;display:flex;align-items:center;justify-content:center;font-size:32px;position:relative}
+.card-thumb .icon-bg{width:52px;height:52px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:24px}
+.card-body{padding:14px}
+.card-top{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:6px}
+.card-name{font-size:14px;font-weight:500;color:var(--color-text-primary);line-height:1.3}
+.badge{font-size:10px;padding:2px 8px;border-radius:10px;font-weight:500;white-space:nowrap;margin-left:6px;flex-shrink:0}
+.badge-web{background:#E6F1FB;color:#0C447C}
+.badge-api{background:#EAF3DE;color:#27500A}
+.badge-ai{background:#EEEDFE;color:#3C3489}
+.card-desc{font-size:12px;color:var(--color-text-secondary);line-height:1.6;margin-bottom:12px}
+.tags{display:flex;gap:5px;flex-wrap:wrap;margin-bottom:12px}
+.tag{font-size:10px;padding:2px 8px;border-radius:6px;background:var(--color-background-secondary);color:var(--color-text-secondary);border:0.5px solid var(--color-border-tertiary)}
+.card-footer{display:flex;align-items:center;justify-content:space-between;padding-top:10px;border-top:0.5px solid var(--color-border-tertiary)}
+.links{display:flex;gap:8px}
+.link-btn{font-size:11px;color:var(--color-text-info);text-decoration:none;display:flex;align-items:center;gap:3px}
+.link-btn:hover{text-decoration:underline}
+.stars{display:flex;align-items:center;gap:3px;font-size:11px;color:var(--color-text-tertiary)}
+.star{width:10px;height:10px;fill:#FAC775}
+.featured{border:1.5px solid #AFA9EC}
+.featured-badge{position:absolute;top:8px;left:8px;font-size:10px;padding:2px 8px;border-radius:10px;background:#EEEDFE;color:#3C3489;font-weight:500;border:0.5px solid #AFA9EC}
+.thumb-web{background:#E6F1FB}
+.thumb-api{background:#EAF3DE}
+.thumb-ai{background:#EEEDFE}
+.thumb-bot{background:#FAEEDA}
+
+.view-more{display:flex;justify-content:center;margin-top:1.5rem}
+.view-btn{font-size:13px;padding:8px 24px;border-radius:var(--border-radius-md);border:0.5px solid var(--color-border-secondary);background:transparent;color:var(--color-text-secondary);cursor:pointer}
+.view-btn:hover{background:var(--color-background-secondary)}
+</style>
+
+<div class="section">
+  <div class="section-header">
+    <span class="section-title">Projects</span>
+    <div class="filters">
+      <button class="chip active" onclick="filter(this,'all')">All</button>
+      <button class="chip" onclick="filter(this,'web')">Web App</button>
+      <button class="chip" onclick="filter(this,'api')">API</button>
+      <button class="chip" onclick="filter(this,'ai')">AI / Bot</button>
+    </div>
+  </div>
+
+  <div class="grid" id="grid"></div>
+
+  <div class="view-more">
+    <button class="view-btn" onclick="sendPrompt('Buatkan konten teks untuk bagian portofolio project software saya')">Lihat semua project ↗</button>
+  </div>
+</div>
+
+<script>
+const projects=[
+  {type:'ai',featured:true,thumb:'thumb-ai',emoji:'🤖',name:'NexaBot',desc:'AI customer service chatbot berbasis LLM dengan multi-turn conversation & tool calling.',tags:['Python','LangChain','FastAPI'],demo:'#',repo:'#',stars:148},
+  {type:'web',featured:false,thumb:'thumb-web',emoji:'🌐',name:'TaskFlow',desc:'Project management app real-time dengan board Kanban dan analitik produktivitas.',tags:['React','Node.js','WebSocket'],demo:'#',repo:'#',stars:92},
+  {type:'api',featured:false,thumb:'thumb-api',emoji:'⚡',name:'PayAPI',desc:'REST API pembayaran dengan autentikasi OAuth2, webhook, dan dokumentasi Swagger.',tags:['Go','PostgreSQL','Redis'],demo:'#',repo:'#',stars:74},
+  {type:'ai',featured:false,thumb:'thumb-bot',emoji:'🧠',name:'DocuAI',desc:'Chatbot RAG untuk pencarian dokumen internal perusahaan dengan embedding vektor.',tags:['Python','Pinecone','OpenAI'],demo:'#',repo:'#',stars:201},
+  {type:'web',featured:false,thumb:'thumb-web',emoji:'📊',name:'DataViz',desc:'Dashboard analitik interaktif untuk visualisasi data bisnis secara real-time.',tags:['Next.js','D3.js','Tailwind'],demo:'#',repo:'#',stars:56},
+  {type:'api',featured:false,thumb:'thumb-api',emoji:'🔗',name:'WebhookHub',desc:'Platform manajemen webhook terpusat dengan retry logic dan monitoring.',tags:['TypeScript','Prisma','BullMQ'],demo:'#',repo:'#',stars:38},
+];
+
+let current='all';
+
+function filter(el,type){
+  document.querySelectorAll('.chip').forEach(c=>c.classList.remove('active'));
+  el.classList.add('active');
+  current=type;
+  render();
+}
+
+function starSVG(){
+  return `<svg class="star" viewBox="0 0 10 10"><polygon points="5,1 6.2,3.8 9,4.1 7,6 7.6,9 5,7.5 2.4,9 3,6 1,4.1 3.8,3.8" stroke="none"/></svg>`;
+}
+
+function render(){
+  const list=current==='all'?projects:projects.filter(p=>p.type===current);
+  const g=document.getElementById('grid');
+  g.innerHTML=list.map(p=>`
+    <div class="card${p.featured?' featured':''}">
+      <div class="card-thumb ${p.thumb}">
+        <div class="icon-bg" style="background:rgba(255,255,255,0.6)">${p.emoji}</div>
+        ${p.featured?'<span class="featured-badge">★ Featured</span>':''}
+      </div>
+      <div class="card-body">
+        <div class="card-top">
+          <span class="card-name">${p.name}</span>
+          <span class="badge badge-${p.type==='ai'?'ai':p.type}">${p.type==='ai'?'AI/Bot':p.type==='web'?'Web App':'API'}</span>
+        </div>
+        <p class="card-desc">${p.desc}</p>
+        <div class="tags">${p.tags.map(t=>`<span class="tag">${t}</span>`).join('')}</div>
+        <div class="card-footer">
+          <div class="links">
+            <a class="link-btn" href="#">Demo →</a>
+            <a class="link-btn" href="#">Repo</a>
+          </div>
+          <div class="stars">${starSVG()} ${p.stars}</div>
+        </div>
+      </div>
+    </div>
+  `).join('');
+}
+render();
+</script>

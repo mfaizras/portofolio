@@ -183,10 +183,10 @@ export default function Achievements() {
         {/* ─── Totals Strip ─── */}
         <div className="totals-strip">
           {achievements.strips.map((strip, idx) => (
-            <div className="total-item">
-            <div className={`total-num ${strip.color || 'default'}`}>{strip.value}</div>
-            <div className="total-lbl">{strip.label}</div>
-          </div>
+            <div className="total-item" key={`${strip.label}-${idx}`}>
+              <div className={`total-num ${strip.color || 'default'}`}>{strip.value}</div>
+              <div className="total-lbl">{strip.label}</div>
+            </div>
           ))}
         </div>
 

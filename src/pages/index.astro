@@ -47,10 +47,10 @@ const formattedPosts = recentPosts.map((post: CollectionEntry<"blog">) => ({
   <SplashScreen client:load />
   <FloatingNavbar client:load />
   <Hero client:only="react" />
-  <About client:visible />
+  <About />
   <Experience client:visible />
   <SkillGroup client:visible />
-  <VerticalProject client:visible />
+  <VerticalProject />
   <Achievements client:visible />
   <Education client:visible />
   <BlogSection client:visible posts={formattedPosts} />

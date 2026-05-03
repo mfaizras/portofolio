@@ -1,9 +1,40 @@
 ---
-import ProjectTabs from "./ProjectTabs.tsx";
+import ProjectsGrid from "./ProjectsGrid.tsx";
+import { getCollection } from "astro:content";
+
+const projectEntries = (await getCollection("projects"))
+  .sort((a, b) => {
+    const orderA = a.data.order ?? Number.POSITIVE_INFINITY;
+    const orderB = b.data.order ?? Number.POSITIVE_INFINITY;
+
+    if (orderA !== orderB) return orderA - orderB;
+    return a.data.title.localeCompare(b.data.title);
+  })
+  .slice(0, 6);
+const projectItems = projectEntries.map((entry, index) => ({
+  id: index + 1,
+  title: entry.data.title,
+  summary: entry.data.description,
+  description: entry.data.description,
+  techStack: entry.data.techStack,
+  links: {
+    demo: entry.data.demo,
+    github: entry.data.github,
+    blog: entry.data.blog,
+  },
+  image:
+    typeof entry.data.heroImage === "object"
+      ? entry.data.heroImage.src
+      : entry.data.heroImage,
+  categories: entry.data.categories,
+  featured: entry.data.featured,
+  stars: entry.data.stars ?? null,
+  slug: entry.slug,
+}));
 ---
 
 <section id="projects" class="py-12 md:py-24 bg-bg">
-  <div class="container mx-auto px-4 mb-8">
+  <div class="max-w-7xl mx-auto px-4 mb-8">
     <h2 class="text-3xl md:text-5xl font-bold text-center text-heading mb-4">
       Projects
     </h2>
@@ -13,5 +44,7 @@ import ProjectTabs from "./ProjectTabs.tsx";
     </p>
   </div>
 
-  <ProjectTabs client:visible />
+  <div class="max-w-7xl mx-auto px-4">
+    <ProjectsGrid client:visible items={projectItems} />
+  </div>
 </section>

@@ -12,13 +12,13 @@ interface Props {
 const {
   title = "Blog | Faiz Rashid",
   description = "Exploring the world of web development, design, and technology.",
-  image = "/blog-placeholder.png",
+  image,
   pubDate,
   type = "website",
 } = Astro.props;
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
-const socialImageURL = new URL(image, Astro.url);
+const socialImageURL = image ? new URL(image, Astro.url) : undefined;
 ---
 
 <!doctype html>
@@ -59,7 +59,7 @@ const socialImageURL = new URL(image, Astro.url);
     <meta property="og:url" content={Astro.url} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
-    <meta property="og:image" content={socialImageURL} />
+    {socialImageURL && <meta property="og:image" content={socialImageURL} />}
     {
       pubDate && (
         <meta
@@ -74,7 +74,7 @@ const socialImageURL = new URL(image, Astro.url);
     <meta property="twitter:url" content={Astro.url} />
     <meta property="twitter:title" content={title} />
     <meta property="twitter:description" content={description} />
-    <meta property="twitter:image" content={socialImageURL} />
+    {socialImageURL && <meta property="twitter:image" content={socialImageURL} />}
   </head>
   <body>
     <slot />

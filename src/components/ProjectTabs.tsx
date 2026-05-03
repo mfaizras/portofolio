@@ -1,13 +1,40 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { Github, ExternalLink, Code2, Layers, Cpu, BookOpen } from 'lucide-react';
-import projects from '../data/projects.json'
+import projects from '../data/projects.json';
+import skillsData from '../data/skills.json';
 
 
 const iconMap: Record<string, React.FC<any>> = {
   Code2Icon: Code2,
   LayersIcon: Layers,
   CpuIcon: Cpu,
+};
+
+type SkillCategory = {
+  skills: { name: string; icon?: string }[];
+};
+
+type TechItem = {
+  label: string;
+  icon?: string;
+};
+
+const techIconMap = new Map<string, string>();
+(skillsData as SkillCategory[]).forEach((category) => {
+  category.skills.forEach((skill) => {
+    if (skill.icon) {
+      techIconMap.set(skill.name, skill.icon);
+    }
+  });
+});
+
+const normalizeTechItem = (item: string | TechItem): TechItem => {
+  if (typeof item === 'string') {
+    return { label: item, icon: techIconMap.get(item) };
+  }
+
+  return { label: item.label, icon: item.icon ?? techIconMap.get(item.label) };
 };
 
 const getIcon = (iconName: string) => {
@@ -160,14 +187,26 @@ export default function ProjectTabs() {
                       Technologies Used
                     </h3>
                     <div className="flex flex-wrap gap-2.5">
-                      {activeTab.techStack.map((tech) => (
-                        <span 
-                          key={tech} 
-                          className="px-4 py-2 rounded-lg text-sm font-medium bg-bg text-primary border border-primary/20 hover:border-primary/50 transition-colors"
-                        >
-                          {tech}
-                        </span>
-                      ))}
+                      {activeTab.techStack.map((tech) => {
+                        const { label, icon } = normalizeTechItem(tech);
+
+                        return (
+                          <span
+                            key={label}
+                            className="inline-flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium bg-bg text-primary border border-primary/20 hover:border-primary/50 transition-colors"
+                          >
+                            {icon && (
+                              <img
+                                src={icon}
+                                alt={label}
+                                loading="lazy"
+                                className="h-4 w-auto max-w-[16px] shrink-0 object-contain"
+                              />
+                            )}
+                            {label}
+                          </span>
+                        );
+                      })}
                     </div>
                   </div>
                 </div>
