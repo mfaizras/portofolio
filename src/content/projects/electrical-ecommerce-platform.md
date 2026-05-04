@@ -1,5 +1,5 @@
 ---
-title: "ListrikKita.com"
+title: "Electrical eCommerce Platform"
 description: "Migrated the entire application from native PHP to Laravel, restructuring the codebase following SOLID principles with a clear separation of concerns across controllers, service layers, and models."
 categories: ["web"]
 featured: true
@@ -11,14 +11,12 @@ techStack:
   - label: "Redis"
     icon: "https://www.svgrepo.com/show/303460/redis-logo.svg"
   - label: "Payment Gateway"
-demo: "https://listrikkita.com/"
-heroImage: "/assets/projects/listrikkita.png"
 order: 1
 ---
-# Listrikkita
+# Electrical Equipment eCommerce Platform
 ## Overview
 
-ListrikKita.com is Indonesia's official eCommerce platform specializing in electrical equipment and supplies, serving both retail and wholesale customers across the country. The platform hosts a catalog of **16,000+ products** spanning 15+ categories — from lighting and power distribution to EV chargers, PLCs, and industrial tools — and operates offices and showrooms in Jakarta and Bali.
+This project is an official Indonesian eCommerce platform specializing in electrical equipment and supplies, serving both retail and wholesale customers across the country. The platform hosts a catalog of **16,000+ products** spanning 15+ categories — from lighting and power distribution to EV chargers, PLCs, and industrial tools — and operates offices and showrooms in Jakarta and Bali.
 
 I contributed to this project as a developer during my time at **Indo Web City**, where I was tasked with leading a **full codebase refactoring** from a legacy native PHP application to a modern, structured Laravel framework — transforming an aging and hard-to-maintain codebase into a scalable, production-ready platform.
 
