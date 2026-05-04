@@ -6,8 +6,17 @@ const projectEntries = (await getCollection("projects"))
   .sort((a, b) => {
     const orderA = a.data.order ?? Number.POSITIVE_INFINITY;
     const orderB = b.data.order ?? Number.POSITIVE_INFINITY;
+    const featuredA = a.data.featured ?? false;
+    const featuredB = b.data.featured ?? false;
 
-    if (orderA !== orderB) return orderA - orderB;
+    if (featuredA !== featuredB) {
+      return featuredA ? -1 : 1;
+    }
+
+    if (orderA !== orderB) {
+      return orderA - orderB;
+    }
+
     return a.data.title.localeCompare(b.data.title);
   })
   .slice(0, 6);
@@ -28,6 +37,7 @@ const projectItems = projectEntries.map((entry, index) => ({
       : entry.data.heroImage,
   categories: entry.data.categories,
   featured: entry.data.featured,
+  order: entry.data.order,
   stars: entry.data.stars ?? null,
   slug: entry.slug,
 }));

@@ -2,7 +2,7 @@
 title: "Gunadarma Telegram Chatbot"
 description: "Built a university info chatbot with RAG retrieval and natural language answers."
 categories: ["ai"]
-featured: true
+order: 1
 techStack:
   - label: "Python"
     icon: "https://www.svgrepo.com/show/452091/python.svg"
