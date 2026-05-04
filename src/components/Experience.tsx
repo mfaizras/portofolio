@@ -1,6 +1,6 @@
 import { useRef } from 'react';
-import { motion, useScroll, useTransform } from 'motion/react';
-import { Briefcase, Calendar, ChevronRight } from 'lucide-react';
+import { motion, useScroll } from 'motion/react';
+import { Calendar } from 'lucide-react';
 import experienceData from '../data/experience.json';
 
 export default function Experience() {
@@ -33,27 +33,22 @@ export default function Experience() {
         {/* Experience Cards */}
         <div className="relative">
           {/* Vertical Line for Desktop */}
-          <div className="absolute left-[28px] md:left-1/2 top-0 bottom-0 w-0.5 bg-white/5 md:-translate-x-1/2" />
+          <div className="absolute left-[28px] top-0 bottom-0 w-0.5 bg-white/5" />
 
           <div className="flex flex-col gap-12 md:gap-24">
-            {experienceData.careers.map((item, index) => {
-              const isEven = index % 2 === 0;
-              return (
-                <div key={item.id} className={`relative flex items-center md:justify-between ${isEven ? 'md:flex-row' : 'md:flex-row-reverse'}`}>
+            {experienceData.careers.map((item, index) => (
+                <div key={item.id} className="relative flex items-start">
                   
                   {/* Timeline Dot */}
-                  <div className="absolute left-[28px] md:left-1/2 -translate-x-1/2 w-4 h-4 rounded-full bg-primary border-4 border-bgSecondary z-10 shadow-[0_0_0_4px_rgba(127,90,240,0.2)]" />
-
-                  {/* Empty space for the other side on desktop */}
-                  <div className="hidden md:block w-5/12" />
+                  <div className="absolute left-[28px] top-1/2 -translate-x-1/2 -translate-y-1/2 w-4 h-4 rounded-full bg-primary border-4 border-bgSecondary z-10 shadow-[0_0_0_4px_rgba(127,90,240,0.2)]" />
 
                   {/* Content Card */}
                   <motion.div
-                    initial={{ opacity: 0, x: isEven ? -50 : 50, y: 20 }}
+                    initial={{ opacity: 0, x: -40, y: 20 }}
                     whileInView={{ opacity: 1, x: 0, y: 0 }}
                     viewport={{ once: true, margin: "-50px" }}
                     transition={{ duration: 0.5, delay: index * 0.1 }}
-                    className="ml-16 md:ml-0 w-full md:w-5/12"
+                    className="ml-16 w-full"
                   >
                     <div className="group relative bg-bgSecondary rounded-2xl p-8 border border-white/5 hover:border-primary/30 transition-all duration-300 shadow-lg hover:shadow-2xl hover:-translate-y-1">
                       
@@ -90,8 +85,7 @@ export default function Experience() {
                     </div>
                   </motion.div>
                 </div>
-              );
-            })}
+            ))}
           </div>
         </div>
 
