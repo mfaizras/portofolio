@@ -5,27 +5,43 @@
   "careers": [
   {
     "id": 1,
-    "role": "Freelance Fullstack Developer",
+    "role": "Software Engineer",
     "company": "Indo Web City",
-    "period": "2024 - Present",
-    "description": "Developed and maintained multiple client e-commerce platforms. Implemented secure payment gateways, Shipping System, and Real-time Inventory System. Also Assisted in migrating legacy PHP codebases to modern Laravel frameworks.",
+    "period": "2024 - 2026",
+    "description": "Developed and maintained scalable backend services for an e-commerce platform using PHP/Laravel, supporting a catalog of 16,000+ products with Redis caching for improved performance. Integrated third-party payment gateways (DOKU, Nicepay) and logistics services (JNE) through REST APIs and webhooks, enabling reliable real-time transaction processing. Implemented event-driven architecture with Laravel Events and Queues to improve scalability and response times. Led the migration of a legacy native PHP system to Laravel following SOLID principles, achieving a 0% failure rate in K6 load testing with 100 concurrent users and 1,500+ requests. Collaborated with Product, QA, and clients to deliver API specifications and technical documentation aligned with business requirements.",
     "technologies": ["PHP", "Laravel", "MySQL", "Rest API", "Git"]
   },
   {
     "id": 2,
     "role": "Programmer",
     "company": "Psychology Laboratory, Gunadarma University",
-    "period": "2023 - Present",
-    "description": "Developed a desktop-based Emotion Classification System using Python and Keras (Deep Learning), with a Tkinter GUI to facilitate real-time inference for laboratory practicums. Managed laboratory IT infrastructure and provided technical support for practicum sessions, ensuring high availability of hardware and software resources.",
-    "technologies": ["Python", "Keras", "Tkinter", "Git"]
+    "period": "2023 - 2026",
+    "description": "Developed educational and research applications, including a web-based quiz platform, an emotion classification ML model, and a VR simulation. Built an automated certificate generation system that reduced manual effort by 95%, while working closely with academic stakeholders to gather requirements and deliver technical solutions.",
+    "technologies": ["Python", "Keras", "Tkinter", "Git", "CodeIgniter", "MySQL", "Laravel", "Unity", "C#", "PHP"]
   },
   {
     "id": 3,
+    "role": "Machine Learning Cohort",
+    "company": "Asah led by Dicoding and Accenture",
+    "period": "2025 - 2026",
+    "description": "Led the end-to-end machine learning pipeline for the 'AI Learning Insight' capstone project, a student behavior classification system, which was awarded Best Capstone Project with a score of 92/100. Designed and implemented the complete workflow, including data preprocessing, feature engineering, model training and evaluation using scikit-learn, and deployment using Python.",
+    "technologies": ["Python", "Keras", "Tkinter", "Git"]
+  },
+  {
+    "id": 4,
     "role": "Internship",
     "company": "PT. PGAS Solution",
     "period": "2021 - 2022",
     "description": "Performed calibration/troubleshooting for Electronic Volume Converters (EVC) and assembled Automatic Meter Reading (AMR) devices, consistently meeting accuracy targets. Managed inventory audits, facilitated component repairs, and generated technical reports to ensure operational compliance. ",
     "technologies": ["Excel"]
+  },
+  {
+    "id": 5,
+    "role": "Founder & Solo Developer ",
+    "company": "MFS Panel",
+    "period": "2016 - 2017",
+    "description": "Built and launched a Social Media Marketing (SMM) reseller platform, independently managing full-stack development, third-party API integrations, deployment, and operations. Successfully maintained the platform for over a year, serving paying customers while handling customer support, sales, and business operations.",
+    "technologies": ["PHP", "MySQL", "Rest API"]
   }
 ]
 }

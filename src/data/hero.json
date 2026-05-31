@@ -5,7 +5,7 @@
         "desc" : "I'm a",
         "role" : ["Fullstack Developer","Web Developer","Competitive Programmer","Student"]
     },
-    "aboutDesc" : "Software engineer who loves building systems that actually work under pressure. My production experience is in Laravel — including an e-commerce platform with 16,000+ products and multi-gateway payments. On the side, I build personal projects in Go and Node.js to keep pushing my limits. 2× ICPC Asia Jakarta Regional Finalist, which means I take problem-solving pretty seriously. Always looking for ways to build backends that are reliable, scalable, and built to last.",
+    "aboutDesc" : "Software Engineer with 2+ years of experience building scalable backend systems, RESTful APIs, and eventdriven architectures for production applications. Experienced in developing backend services using PHP, Python, Go, and LaravNodeJSel, including asynchronous processing pipelines with Kafka, Redis-based caching, and webhook integrations. Strong foundation in computer science fundamentals, algorithms, and data structures as a 2× ICPC Asia Jakarta Regional Finalist. Passionate about distributed systems, backend performance optimization, and writing clean, maintainable code.",
     "cvLink" : "",
     "email" : "contact@faizrash.id",
     "location" : "Jakarta, Indonesia",

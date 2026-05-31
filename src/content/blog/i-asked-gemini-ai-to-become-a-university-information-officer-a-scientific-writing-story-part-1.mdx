@@ -1,0 +1,148 @@
+---
+title: "I Asked Gemini AI to Become a University Information Officer [A Scientific Writing Story - Part 1]"
+description: "How I built a university information chatbot using Gemini, Retrieval-Augmented Generation (RAG), Telegram, and ChromaDB to answer student questions 24/7."
+pubDate: "May 30 2026"
+heroImage: "../../assets/blog/scientific-writing/i-asked-gemini-ai.png"
+tags: ["College","LLM", "RAG"]
+---
+
+> *This is the story behind my Scientific Writing project at Universitas Gunadarma, split into a two-part series. You are currently reading Part 1; you can check out [Part 2 of this series](/blog/feeding-the-ai-officer-how-i-scraped-and-structured-a-universitys-knowledge-graph-a-scientific-writing-story-part-2/) after finishing this post, or read the full paper in the [Gunadarma Repository](https://library.gunadarma.ac.id/repository/pengembangan-chatbot-informasi-universitas-gunadarma-berbasis-telegram-menggunakan-arsitektur-retrieval-augmented-generation-dengan-model-bahasa-besar-gemini-ssm).*
+
+---
+Every 6th semester Informatics student at Universitas Gunadarma faces the same milestone: **Penulisan Ilmiah** (Scientific Writing). It's not just another course — it's one of the formal requirements to obtain a bachelor's degree (or the equivalent associate-level credential). The goal, as stated by the faculty, is to train students to pour their observations, creations, or work experiences into a written report based on the principles of scientific research ([fti.gunadarma.ac.id](https://fti.gunadarma.ac.id/mesin/wp-content/uploads/2024/09/Petunjuk-Penulisan-PI_FTI-TMesin.pdf), 2023).
+
+When my turn came in early **March 2025**, I was assigned to **Mrs. Nelly Sofi, S.Kom., MMSI** as my supervisor, alongside two other supervisors who split the class into three groups. And just like that, the clock started ticking.
+
+My challenge was clear: find a compelling, feasible project idea, get it approved, build it, and document it to academic standard — all within a single semester. The topic had to be researchable, technically achievable solo, and genuinely *mine* — not a clone of what everyone else was doing. On top of all that, I still needed to figure out: what problem am I actually solving?
+
+The pressure wasn't just academic. Almost every classmate around me had already locked in their topics — mostly sentiment analysis, image classification, text categorization, or even software development.
+
+But something felt off for me. I wanted to work on something that genuinely *excited* me, something I could own from end to end.
+
+---
+
+### 1. Choosing the Right Topic in a Noisy Landscape
+
+In March 2025, **Large Language Models were everywhere**. Everyone was talking about GPT, Gemini, Claude, and the endless applications built on top of them. My peers mostly gravitated toward well-trodden ML paths — sentiment analysis, image classification, text categorization. All solid choices.
+
+But I was genuinely excited about LLMs. Not just as a trend to follow, but as a technology I actually wanted to dig into. So from the start, my direction was clear: whatever I build, it's going to involve an LLM. The question wasn't *which technology* — it was *what problem worth solving* could I apply it to.
+
+The answer came from my own experience with live chat support — both on university platforms and e-commerce sites. Whenever I had a specific question, I'd open the chat widget hoping for a real answer, only to be met with a **template response from a rule-based bot**. It would match a keyword, fire back a generic reply, and completely miss what I was actually asking. If I pushed further, the bot would either loop back to the same canned answers or tell me to wait for a human agent — who was only available during business hours. So there I'd be, 9 PM, question unresolved, just hoping I'd remember to follow up the next day.
+
+That pattern stuck with me. Rule-based chatbots are everywhere, and they're frustrating precisely because they *look* helpful but aren't. They handle the easy cases and fall apart the moment a question requires any real understanding. The fix wasn't just "add more rules" — it was a fundamentally different approach.
+
+That's where I landed on the idea of a **customer service chatbot powered by an LLM and RAG** — something that could understand questions naturally, answer from real and sourced information, a more natural response, and do it 24/7 without human intervention. The concept felt solid. But it was still missing one thing: *for whom?*
+
+### 2. Proposing to My Supervisor & Refining the Scope
+
+When I brought the concept to Mrs. Nelly, her first question cut straight to the point:
+
+> *For which organization do you want to build this chatbot?*
+
+I didn't have a good answer yet. But her follow-up suggestion crystallized everything:
+
+> *Why not Gunadarma itself? It's close to us, and you understand it from the inside.*
+
+That clicked immediately. As a Gunadarma student, I'd felt the problem firsthand — need to know about academic calendars, enrollment procedures, or faculty contacts? You'd have to hunt across multiple websites, hope the page loads, and cross-reference several sources, often during office hours only. I was the target user. I *lived* this problem. And building for my own university meant I had direct context, real motivation, and a genuine stake in whether it worked. Approved.
+
+### 3. Designing the Architecture
+
+The system I designed is conceptually straightforward but technically layered:
+
+<p style="text-align:center;">
+  <img src="/assets/blog/scientific-writing/aristektur-sistem.png"  style="margin-left:auto; margin-right:auto;"/>
+</p>
+
+Here's the flow in plain language:
+
+1. A user sends a message on Telegram.
+2. The Telegram Bot forwards it to the chatbot server.
+3. The server sends the query to **Gemini API** with a system prompt, user prompt, and a **tool definition** for context retrieval.
+4. If Gemini determines it needs external knowledge, it calls the retrieval tool.
+5. The tool performs a **similarity search** over the vector database (Chroma DB).
+6. Relevant document chunks are returned to Gemini as context.
+7. Gemini generates a grounded, accurate response.
+8. The response flows back to the user on Telegram.
+
+This is the **Retrieval-Augmented Generation (RAG)** pattern — a hybrid generative AI technique that enhances Large Language Models (LLMs) by integrating them with external data sources. ([GitHub](https://github.com/resources/articles/software-development-with-retrieval-augmentation-generation-rag), 2026).
+
+#### Why LLMs Alone Aren't Enough
+LLMs like Gemini are trained on enormous amounts of text data — web pages, books, articles, forums — collected up to a certain point in time. That training process is what gives them their impressive ability to understand language, reason through problems, and generate fluent responses. But once training ends, **the model's knowledge is frozen**. It cannot learn new information on its own, and it has no awareness of anything that happened after its training cutoff.
+
+For a general-purpose assistant, that limitation is manageable. But for a domain-specific chatbot — one that's supposed to answer questions about *specific* enrollment deadlines, *specific* faculty requirements, *specific* internal procedures — a frozen model is a serious problem. The university's data was never part of Gemini's training set to begin with.
+
+There's a second, more subtle problem: **hallucination**. When an LLM is asked something it doesn't actually know, it doesn't say "I don't know" — it generates a response that *sounds* plausible. For a university chatbot, that's not just unhelpful, it's dangerous. A student acting on a confidently wrong answer about a submission deadline or a graduation requirement could face real academic consequences.
+
+The third limitation is **context**. Even if you tried to cram an entire university's document library into a prompt, LLMs have a maximum context window — there's a hard ceiling on how much text they can process at once. You simply can't feed everything in and hope for the best.
+
+#### Two Ways to Teach an LLM New Knowledge
+
+When you need an LLM to know things it wasn't trained on, there are really only two practical paths: **fine-tuning** or **RAG**.
+
+**Fine-tuning** is the process of adapting a pre-trained model for specific tasks or use cases. The model's weights get updated, and the new knowledge becomes baked in. In theory, this sounds ideal — the model truly *learns* your domain. In practice, it comes with serious drawbacks. Fine-tuning requires significant compute resources and cost, which for a student solo project was simply out of reach. Beyond cost, fine-tuned models don't update gracefully — every time the university revises a policy or publishes a new document, you'd need to re-run the training process from scratch. And perhaps most critically, fine-tuning doesn't reliably eliminate hallucination; the model still generates from learned patterns, so it can still confabulate with confidence when pushed outside what it was trained on.
+
+**RAG** ompletely bypasses this problem. Instead of forcing the model to *memorize everything*, RAG acts like an open-book exam. When a user asks a question, the system searches the database, retrieves the exact relevant document, and hands it to the LLM to read and summarize on the spot. It is drastically cheaper because you don't need to retrain the model. It is also much easier to maintain—if a rule changes, you simply replace the old data in the vector database with the new one, and the chatbot is instantly up to date.
+
+For this project, the choice was straightforward. RAG is lightweight, maintainable, and honest about what it knows. Fine-tuning was neither affordable nor necessary.
+
+### 4. Choosing the Tech Stack
+
+Every tool in the stack was chosen deliberately:
+
+| Component | Tool | Reason |
+|---|---|---|
+| **Interface** | Telegram Bot API | Free, open, widely used, no hosting fees for the bot itself |
+| **LLM** | Google Gemini | One of the best-performing affordable models in early 2025 |
+| **Vector Database** | ChromaDB | Open source, runs locally, no cloud dependency |
+| **Text Embedding** | `sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2` | Lightweight, multilingual (handles Indonesian + English), runs on CPU |
+
+The multilingual embedding model was a particularly important choice — Gunadarma content is mostly in Indonesian, but users might query in English or any other languages. This model handles both seamlessly without needing separate pipelines.
+
+### 5. The Interesting Part — Building the Knowledge Base
+
+Here's where things got interesting (and messy).
+ 
+A RAG system is only as good as its knowledge base. Gunadarma has plenty of information — but none of it is available in a structured, ready-to-use format. There's no single document to download, no API to query. Everything is published across multiple active websites, designed for human readers, not machines.
+ 
+My solution: **build a custom web crawler** to systematically scrape and structure the content from Gunadarma's official web properties.
+ 
+My supervisor also pointed me toward **UGpedia** — a dedicated Gunadarma information portal. There was just one problem: *UGpedia was no longer active.*
+ 
+But I found a workaround for UGpedia too. Both the crawling strategy and the UGpedia recovery solution are stories worth their own deep-dives — you can read all about them in [Part 2 of this series](/blog/feeding-the-ai-officer-how-i-scraped-and-structured-a-universitys-knowledge-graph-a-scientific-writing-story-part-2/).
+
+From the crawler, I gathered over **5,332 pages**, but after manual review, only **1,171 documents** were usable for the knowledge base. That means roughly 78% of the raw data was discarded.
+
+The scraped content was then:
+1. Cleaned and chunked into semantically meaningful segments.
+2. Embedded using the multilingual sentence transformer.
+3. Stored in ChromaDB for similarity retrieval.
+
+---
+
+## The Outcome
+
+The project was completed, submitted, and accepted as my **Penulisan Ilmiah** for Semester 6 — fulfilling the academic requirement toward my degree. successfully defended the project and officially passed on **August 29, 2025**.
+
+The knowledge base ended up with **1,171 curated documents** drawn from an initial crawl of **5,332 pages** — the gap reflects how much noise a real-world web crawl produces. Navigation menus, duplicate content, error pages, login walls, and file downloads all had to be manually reviewed and filtered out before anything was worth embedding.
+
+For a deeper dive into the application's architecture, the complete development process, and testing methodologies, you can read the full documentation on the [Gunadarma Repository](https://library.gunadarma.ac.id/repository/pengembangan-chatbot-informasi-universitas-gunadarma-berbasis-telegram-menggunakan-arsitektur-retrieval-augmented-generation-dengan-model-bahasa-besar-gemini-ssm).
+
+But beyond the grade, here's what the project actually demonstrated:
+
+- **24/7 availability**: Unlike the university's information offices, the chatbot never sleeps. A student asking about registration deadlines at 11 PM gets an answer immediately.
+- **Hallucination mitigation**: By grounding Gemini's responses in real retrieved documents via RAG, the system dramatically reduces the risk of the model making things up — a critical concern for institutional information services.
+- **Low operational cost**: Telegram's free Bot API, Gemini's affordable pricing tier, and locally-hosted ChromaDB meant the system could realistically be maintained without significant infrastructure cost.
+- **Multilingual handling**: The embedding model handles Indonesian queries naturally, making it accessible to all Gunadarma students.
+
+
+### Looking Forward: Room for Improvement
+
+While the system successfully achieved its goals, there is still room for optimization. One major area for future improvement is the quality and scope of the dataset. Currently, the bot relies on scraped website data, but real-world testing revealed that users frequently ask specific, practical questions whose answers simply aren't documented on the university's official pages. Enriching the RAG pipeline with a higher-quality, custom dataset—such as crowdsourced FAQs, academic guidelines, or direct insights from administrative staff—would significantly bridge this gap and make the chatbot even more robust.
+
+---
+
+## Resources
+
+- 📄 **Full Paper**: [Pengembangan Chatbot Informasi Universitas Gunadarma Berbasis Telegram Menggunakan Arsitektur Retrieval-Augmented Generation dengan Model Bahasa Besar Gemini](https://library.gunadarma.ac.id/repository/pengembangan-chatbot-informasi-universitas-gunadarma-berbasis-telegram-menggunakan-arsitektur-retrieval-augmented-generation-dengan-model-bahasa-besar-gemini-ssm)
+- 💻 **Source Code**: [github.com/mfaizras/gunadarma-telegram-chatbot](https://github.com/mfaizras/gunadarma-telegram-chatbot)
+- 🔗 **Part 2** — [Feeding the AI Officer: How I Scraped and Structured a University's Knowledge Graph](/blog/feeding-the-ai-officer-how-i-scraped-and-structured-a-universitys-knowledge-graph-a-scientific-writing-story-part-2/)

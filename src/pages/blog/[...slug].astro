@@ -111,12 +111,20 @@ const heroImage =
             </div>
           )
         }
-      </div>
 
+        {
+              (post.data.heroDescription && post.data.heroImage) && (
+                <div class="text-center text-sm font-medium mt-4 italic">
+                  {post.data.heroDescription}
+                </div>
+              )
+            }
+      </div>
+      
       {/* Content */}
       <div
         class="prose prose-invert prose-lg max-w-none prose-headings:text-heading prose-a:text-primary prose-a:no-underline hover:prose-a:underline prose-img:rounded-xl prose-pre:bg-bgSecondary prose-pre:border prose-pre:border-white/10 text-justify"
-      >
+        >
         <Content />
       </div>
     </div>
