@@ -27,7 +27,7 @@ In March 2025, **Large Language Models were everywhere**. Everyone was talking a
 
 But I was genuinely excited about LLMs. Not just as a trend to follow, but as a technology I actually wanted to dig into. So from the start, my direction was clear: whatever I build, it's going to involve an LLM. The question wasn't *which technology* — it was *what problem worth solving* could I apply it to.
 
-The answer came from my own experience with live chat support on university platforms and e-commerce sites. I'd open a chat widget hoping for a real answer, get a **template response from a rule-based bot** that matched a keyword and fired back something generic, completely missing what I asked. If I pushed further, the bot looped back to the same canned answers or told me to wait for a human agent — available only during business hours. So there I'd be, 9 PM, question unresolved, just hoping I'd remember to follow up the next day.
+The answer came from my own experience with live chat support on e-commerce sites. I'd open a chat widget hoping for a real answer, get a **template response from a rule-based bot** that matched a keyword and fired back something generic, completely missing what I asked. If I pushed further, the bot looped back to the same canned answers or told me to wait for a human agent — available only during business hours. So there I'd be, 9 PM, question unresolved, just hoping I'd remember to follow up the next day.
 
 That pattern stuck with me. Rule-based chatbots *look* helpful but aren't. They handle the easy cases and fall apart the moment a question requires any real understanding. The fix wasn't just "add more rules" — it was a fundamentally different approach.
 
@@ -43,7 +43,7 @@ I didn't have a good answer yet. But her follow-up suggestion crystallized every
 
 > *Why not Gunadarma itself? It's close to us, and you understand it from the inside.*
 
-As a Gunadarma student, I'd felt the problem firsthand. Academic calendars, enrollment procedures, faculty contacts — you'd have to hunt across multiple websites, hope the page loaded, and cross-reference sources, often during office hours only. I was the target user. Approved.
+As a Gunadarma student, I had experienced the problem firsthand. Academic calendars, enrollment procedures, and faculty contacts were scattered across multiple websites. Finding the right information often meant navigating several pages, waiting for them to load, and cross-checking different sources. The alternative was contacting a human support agent, but they were only available during working hours. I was the target user and the idea was approved.
 
 ### 3. Designing the Architecture
 
@@ -81,7 +81,7 @@ When you need an LLM to know things it wasn't trained on, there are really only 
 
 **Fine-tuning** is the process of adapting a pre-trained model for specific tasks or use cases. The model's weights get updated, and the new knowledge becomes baked in. In theory, this sounds ideal — the model truly *learns* your domain. In practice, it comes with serious drawbacks. Fine-tuning requires significant compute resources and cost, which for a student solo project was simply out of reach. Beyond cost, fine-tuned models don't update gracefully — every time the university revises a policy or publishes a new document, you'd need to re-run the training process from scratch. And perhaps most critically, fine-tuning doesn't reliably eliminate hallucination; the model still generates from learned patterns, so it can still confabulate with confidence when pushed outside what it was trained on.
 
-**RAG** ompletely bypasses this problem. Instead of forcing the model to *memorize everything*, RAG acts like an open-book exam. When a user asks a question, the system searches the database, retrieves the exact relevant document, and hands it to the LLM to read and summarize on the spot. It is drastically cheaper because you don't need to retrain the model. It is also much easier to maintain—if a rule changes, you simply replace the old data in the vector database with the new one, and the chatbot is instantly up to date. No retraining. No compute cost.
+**RAG** completely bypasses this problem. Instead of forcing the model to *memorize everything*, RAG acts like an open-book exam. When a user asks a question, the system searches the database, retrieves the exact relevant document, and hands it to the LLM to read and summarize on the spot. It is drastically cheaper because you don't need to retrain the model. It is also much easier to maintain—if a rule changes, you simply replace the old data in the vector database with the new one, and the chatbot is instantly up to date. No retraining. No compute cost.
 
 For this project, RAG was the obvious choice.
 
