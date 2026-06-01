@@ -6,17 +6,15 @@ heroImage: "../../assets/blog/scientific-writing/feeding-the-ai-officer.png"
 tags: ["College", "Web Scraping", "Python", "RAG"]
 
 ---
-> *Part 2 of the story behind my Scientific Writing project at Universitas Gunadarma. If you haven't read Part 1, [start here](/blog/i-asked-gemini-ai-to-become-a-university-information-officer-a-scientific-writing-story-part-1/) — it covers the project idea, architecture, and tech stack decisions or read the full paper in the [Gunadarma Repository](https://library.gunadarma.ac.id/repository/pengembangan-chatbot-informasi-universitas-gunadarma-berbasis-telegram-menggunakan-arsitektur-retrieval-augmented-generation-dengan-model-bahasa-besar-gemini-ssm)..*
+> *Part 2 of the story behind my Scientific Writing project at Universitas Gunadarma. If you haven't read Part 1, [start here](/blog/i-asked-gemini-ai-to-become-a-university-information-officer-a-scientific-writing-story-part-1/) — it covers the project idea, architecture, and tech stack decisions or read the full paper in the [Gunadarma Repository](https://library.gunadarma.ac.id/repository/pengembangan-chatbot-informasi-universitas-gunadarma-berbasis-telegram-menggunakan-arsitektur-retrieval-augmented-generation-dengan-model-bahasa-besar-gemini-ssm).*
  
 ---
 
 In the [previous post](/blog/i-asked-gemini-ai-to-become-a-university-information-officer-a-scientific-writing-story-part-1/), I explained the high-level idea: a Telegram chatbot for Gunadarma University, powered by Gemini and a RAG architecture. The architecture was solid, the LLM was smart, but I quickly ran into the biggest bottleneck of any AI project: **Data**. 
 
-An AI is only as good as the knowledge it has access to. My problem? Gunadarma University didn't provide a neatly structured API or a single comprehensive database of campus information. Everything was scattered across dozens of different university web pages. 
+An AI is only as good as the knowledge it has access to. My problem? Gunadarma doesn't provide a structured API or a downloadable database of campus information. Everything is scattered across dozens of web pages. The knowledge base ended up with **1,171 curated documents** — but only after the crawler first collected **5,332 pages**, which then had to be manually reviewed and filtered.
 
-The knowledge base behind it ended up with **1,171 curated documents** — but that number only exists because the crawler first collected **5,332 pages**, which then had to be manually reviewed and filtered for quality.
- 
-This post is about how those 5,332 pages were collected. It's also about what happens when one of your two data sources is a portal that no longer exists.
+This post covers how those 5,332 pages were collected, and what happened when one of the two data sources turned out to be a portal that no longer existed.
  
 ---
  
@@ -46,7 +44,7 @@ Every web page is a node. Every hyperlink is a directed edge pointing from one p
  
 Once I framed it that way, the algorithm choice was **Breadth-First Search**. BFS is purpose-built for traversing graphs level by level — visit a node, discover its neighbors, queue them up, move on. Applied to the web, that means: scrape a page, collect all its links, add them to the queue, process the next one.
  
-This isn't documented in the paper — so here's how it actually worked.
+This isn't in the paper, so here's how it actually worked:
 
 <p style="text-align:center;">
   <img src="/assets/blog/scientific-writing/flowchart-crawler.png"  style="margin-left:auto; margin-right:auto;"/>
@@ -58,6 +56,7 @@ Starting from a given URL, the crawler:
 2. Extracts all anchor tags (`<a>`) and adds valid Gunadarma URLs to the queue.
 3. Mark current url as visited
 4. Pops the next URL from the queue and repeats.
+
 BFS processes pages level by level — first the starting page, then all pages linked from it, then all pages linked from *those*, and so on.
  
 #### Persistence Across Crashes
@@ -67,7 +66,7 @@ One practical problem with long-running crawlers: what happens when the server d
 I solved this with three plain text files that act as persistent memory:
  
 - **`queue.txt`** — the current frontier of URLs to be visited, persisted to disk after every addition so the queue survives restarts.
-- **`archive.txt`** — every URL that has already been scraped (visited). If a URL appears in the archive, it's skipped — no duplicate work, no infinite loops.
+- **`archive.txt`** — every URL that has already been scraped (visited). Anything in the archive gets skipped, preventing duplicates and infinite loops.
 - **`banned.txt`** — a blocklist of domains and URL patterns to never visit. This is how I excluded login pages, file downloads like PDFs and PPTs, and any non-Gunadarma domains that happened to be linked.
 
 The result: even if the crawler ran for hours and crashed halfway through, restarting it would pick up exactly where it left off.
@@ -113,7 +112,7 @@ if not contentText:
     contentText = soup.find('body')
 ```
  
-All scraped content was saved to a CSV file with columns for title, content (converted to Markdown via `html2text`), source URL, and raw HTML — giving me multiple representations to work with downstream.
+All scraped content was saved to a CSV file with columns for title, content (converted to Markdown via `html2text`), source URL, and raw HTML.
  
 ---
  
@@ -121,7 +120,7 @@ All scraped content was saved to a CSV file with columns for title, content (con
 
 While planning the knowledge base, Mrs. Nelly suggested a second data source: **UGpedia** — a dedicated Gunadarma FAQ portal that had previously compiled common student questions and official answers in one place. Exactly the kind of structured, high-quality content that would be perfect for a RAG system.
  
-There was just one problem: UGpedia was gone. The domain was dead, the site was offline, and there was no archived download anywhere to be found.
+There was just one problem: UGpedia was gone. The domain was dead and the site was offline.
  
 I spent some time turning this over. Then one website came to mind: **the Wayback Machine**
  
@@ -135,7 +134,7 @@ I opened the Wayback Machine, searched for UGpedia, and found snapshots availabl
   <img src="/assets/blog/scientific-writing/wayback-machine-ugpedia.png"  style="margin-left:auto; margin-right:auto;"/>
 </p>
 
-Since it was a single, consistent website rather than dozens of different subdomains, the structure was uniform across every page — one HTML template, predictable content placement. That made writing a targeted scraper significantly more straightforward than the main Gunadarma crawler.
+Since it was a single consistent template across every page — one HTML structure, predictable content placement. Writing a targeted scraper was much more straightforward than the main Gunadarma crawler.
  
 #### The Problem: Rate Limiting
  
@@ -186,7 +185,7 @@ So the data needed cleaning. The question was how.
  
 Manual cleaning at this scale wasn't realistic. Rule-based regex could handle some HTML artifacts but would fall apart on anything requiring actual language understanding — like recognizing that a block of text is a leftover navigation menu, not real content. This was a job for an LLM.
  
-I chose the **Claude API** for two reasons. First, Claude was at the time one of the strongest models available for language understanding and structured text tasks — exactly what careful document cleaning requires. Second, and more practically: Anthropic's **Batch API** prices requests at **50% of the standard API cost**. For a bulk processing job with hundreds of documents, that difference matters.
+I chose the **Claude API** for two reasons. First, Claude was one of the stronger models available for structured text tasks at the time. Second: Anthropic's **Batch API** prices requests at **50% of the standard API cost**. For a bulk job with hundreds of documents, that difference matters.
  
 The Batch API works asynchronously — you submit all your requests at once, and retrieve the results when they're done, rather than waiting for each response before sending the next. That's a much better fit for this kind of offline processing job than sequential calls, and the cost saving made it an easy decision.
  
@@ -198,7 +197,7 @@ Each document was sent to Claude with a prompt asking it to clean and restructur
  
 At the end of this pipeline, the crawler had collected **5,332 pages** across Gunadarma's subdomains and UGpedia's archived content. After manual quality filtering — cutting navigation fragments, duplicate pages, error pages, content-free shells, and anything that wouldn't add real value to a retrieval system — **1,171 documents** made it through.
  
-That 78% drop isn't a failure of the crawler. It's a reality of how the web works. A large portion of any crawl will always be structural noise rather than actual content. Building the pipeline to collect broadly and filter carefully was the right call — the alternative, trying to be surgical upfront, would have meant missing legitimate content.
+That 78% drop isn't a failure of the crawler. It reflects how the web is built. A large portion of any crawl will be structural noise rather than content. Collecting broadly and filtering carefully was the right approach — trying to be surgical upfront would have meant missing legitimate content.
  
 Those 1,171 documents were then chunked, embedded with the multilingual sentence transformer, and loaded into ChromaDB as the final knowledge base for the RAG system.
  
@@ -210,7 +209,7 @@ Those 1,171 documents were then chunked, embedded with the multilingual sentence
  
 **The Wayback Machine is an underrated engineering resource.** When a data source goes offline, it's often not gone forever. For anyone building knowledge systems around institutional or historical content, it's worth checking the archive before giving up.
 
-**A solid understanding of data structures changes how you see problems.** When I looked at Gunadarma's web presence, I didn't see "a bunch of websites" — I saw a graph. Pages as nodes, hyperlinks as directed edges. That one mental shift made the crawler design obvious: if the problem is graph traversal, reach for a graph algorithm. BFS was the natural fit. This is why data structures aren't just exam material — they're a lens for modeling the real world, and the clearer that lens is, the faster you arrive at the right solution.
+**Data structures are a lens, not just exam material.** When I looked at Gunadarma's web presence, I saw a graph — pages as nodes, hyperlinks as directed edges. That framing made the crawler design follow naturally. BFS was the fit because the problem was graph traversal. The clearer that lens is, the faster you arrive at the right solution.
  
 ---
  

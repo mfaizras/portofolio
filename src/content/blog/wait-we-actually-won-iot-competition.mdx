@@ -64,7 +64,7 @@ When a **student card** is scanned, the device enters `BorrowState`. Every **boo
 
 A physical **button** on the device triggers `AdminState`. Every tag scanned in this mode is forwarded directly to the frontend for registering new books or student cards into the system.
 
-### The Container Hack: Long Polling Over WebSockets
+### The Container Hack: Short Polling Over WebSockets
 We had a classic IoT communication challenge: how the frontend would receive real-time UID scans from the device during the Admin State?  Ideally, you would use WebSockets for this. However, to keep things lightweight and fast to implement we needed a creative solution.
 
 We designed what we called a **Container Endpoint** — a small, self-flushing buffer living in the database.
@@ -75,7 +75,7 @@ We created a specific backend endpoint (`/container_card`).
 * When the IoT device makes a `POST` request, it temporarily saves the scanned UID into the database.
 * When the frontend makes a `GET` request, the database returns the UID and *immediately deletes it* from the table. This means subsequent `GET` requests will return empty until a new card is scanned.
 
-By having our frontend perform **long polling** on this endpoint, we successfully simulated a real-time data feed without the overhead of maintaining WebSocket connections.
+By having our frontend perform **short polling** on this endpoint, we successfully simulated a real-time data feed without the overhead of maintaining WebSocket connections.
 
 ## The Final Day
 <img src="/assets/blog/we-actually-won-iot-competition/header.jpg" style="margin-left:auto; margin-right:auto;"/>
