@@ -23,6 +23,8 @@ gallery:
 # Gunadarma Telegram Chatbot – RAG + Gemini LLM
 
 *   **Paper:** [Gunadarma Repository](https://library.gunadarma.ac.id/repository/pengembangan-chatbot-informasi-universitas-gunadarma-berbasis-telegram-menggunakan-arsitektur-retrieval-augmented-generation-dengan-model-bahasa-besar-gemini-ssm)
+*   **Story Behind the Paper Part 1:** [I Asked Gemini AI to Become a University Information Officer [A Scientific Writing Story - Part 1]](https://faizrash.id/blog/i-asked-gemini-ai-to-become-a-university-information-officer-a-scientific-writing-story-part-1/)
+*   **Story Behind the Paper Part 2:** [Feeding the AI Officer: How I Scraped and Structured a University's Knowledge Base [A Scientific Writing Story - Part 2]](https://faizrash.id/blog/feeding-the-ai-officer-how-i-scraped-and-structured-a-universitys-knowledge-base-a-scientific-writing-story-part-2/)
 
 ## Background
 Developed as a core component of my Scientific Writing project for the Informatics Department at Universitas Gunadarma in 2025, this system addresses the need for a centralized information hub. The goal was to move away from static FAQ pages and provide students with a conversational interface capable of retrieving specific university data through a verified knowledge base.
